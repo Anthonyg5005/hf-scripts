@@ -84,6 +84,6 @@ if tfound == 'false':
           You were logged in as {uname}.
           
           To logout, use the cli 'huggingface-cli logout'
-          TO view your active account, use 'huggingface-cli whoami'
+          To view your active account, use 'huggingface-cli whoami'
           ''')
 input("Press enter to continue.")
