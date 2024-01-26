@@ -1,4 +1,13 @@
 # scripts
 
 Personal scripts to automate some tasks.\
-Some of these were written during school so may not be properly tested.
+Will try to keep external module use to a minimum, other than **huggingface_hub**.\
+Feel free to send in pull requests.
+
+## existing scripts
+
+- Create new branches
+
+## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
+
+- Manage branches (create/delete)
