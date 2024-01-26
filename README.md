@@ -9,8 +9,8 @@ Feel free to send in pull requests or use this code however you'd like.
 
 ## existing scripts
 
-- Create new branches
+- Manage branches (create/delete)
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- Manage branches (create/delete)
+none
