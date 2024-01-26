@@ -1,3 +1,6 @@
+---
+license: unlicense
+---
 # scripts
 
 Personal scripts to automate some tasks.\
