@@ -34,11 +34,11 @@ create_branch(repo, repo_type=r_type, branch=branch)
 #extra information
 #won't work if special characters are used
 if r_type == 'model':
-    print(f"Branch created at https://huggingface/{repo}/tree/{branch}")
+    print(f"Branch created at https://huggingface.co/{repo}/tree/{branch}")
 elif r_type == 'dataset':
-    print(f"Branch created at https://huggingface/datasets/{repo}/tree/{branch}")
+    print(f"Branch created at https://huggingface.co/datasets/{repo}/tree/{branch}")
 elif r_type == 'space':
-    print(f"Branch created at https://huggingface/spaces/{repo}/tree/{branch}")
+    print(f"Branch created at https://huggingface.co/spaces/{repo}/tree/{branch}")
 #if token wasn't found then display following text:
 if tfound == 'false':
     print('''
