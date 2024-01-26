@@ -1,6 +1,6 @@
 #import required modules
 import os
-from huggingface_hub import create_branch, delete_branch, login, get_token
+from huggingface_hub import create_branch, delete_branch, login, get_token, whoami
 
 #set clear screen function
 def clear_screen():
@@ -34,6 +34,9 @@ branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
+
+#TODO: verify that the token is WRITE and not READ
+
 if get_token() == 'None':
     #if the token is not found then prompt user to provide it:
     hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
@@ -45,7 +48,12 @@ else:
 
 #login
 login(hf_token)
-uname = "get name from token, if possible"
+
+
+#TODO: get fullname from whoami()
+uname = ""
+
+
 
 #create or delete the branch
 if cord == 'create':
