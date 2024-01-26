@@ -57,13 +57,21 @@ else:
 
 #extra information
 clear_screen()
-#won't work if special characters are used
-if r_type == 'model':
-    print(f"Branch created at https://huggingface.co/{repo}/tree/{branch}")
-elif r_type == 'dataset':
-    print(f"Branch created at https://huggingface.co/datasets/{repo}/tree/{branch}")
-elif r_type == 'space':
-    print(f"Branch created at https://huggingface.co/spaces/{repo}/tree/{branch}")
+#won't work if special characters are used but should still successfully be created/deleted
+if cord == 'create':
+    if r_type == 'model':
+        print(f"Branch created at https://huggingface.co/{repo}/tree/{branch}")
+    elif r_type == 'dataset':
+        print(f"Branch created at https://huggingface.co/datasets/{repo}/tree/{branch}")
+    elif r_type == 'space':
+        print(f"Branch created at https://huggingface.co/spaces/{repo}/tree/{branch}")
+else:
+    if r_type == 'model':
+        print(f"Branch deleted on {r_type} https://huggingface.co/{repo}")
+    elif r_type == 'dataset':
+        print(f"Branch deleted on {r_type} https://huggingface.co/datasets/{repo}")
+    elif r_type == 'space':
+        print(f"Branch deleted on {r_type} https://huggingface.co/spaces/{repo}")
 #if token wasn't found then display following text:
 if tfound == 'false':
     print('''
