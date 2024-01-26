@@ -13,4 +13,4 @@ Feel free to send in pull requests or use this code however you'd like.
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-none
+-Push to hf hub
