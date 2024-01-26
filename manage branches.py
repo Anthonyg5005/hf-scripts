@@ -21,7 +21,7 @@ while True:
     
     break
 clear_screen()
-repo = input("Repository name: ")
+repo = input("Repository name (User/Repo): ")
 clear_screen()
 while True:
     r_type = input("Repo type (model) (dataset) (space): ").lower()
@@ -33,7 +33,7 @@ while True:
     
     break
 clear_screen()
-branch = input("New branch name (No spaces): ")
+branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
