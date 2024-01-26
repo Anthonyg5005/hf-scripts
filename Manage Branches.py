@@ -15,7 +15,7 @@ while True:
     
     if cord not in ['create', 'delete']:
         clear_screen()
-        print("Please choose one of the two options.")
+        print("Please choose one of the following two options.")
         continue
     break
 clear_screen()
@@ -26,7 +26,7 @@ while True:
     
     if r_type not in ['model', 'dataset', 'space']:
         clear_screen()
-        print("Please choose one of the three options.")
+        print("Please choose one of the following three options.")
         continue
     break
 clear_screen()
@@ -34,17 +34,18 @@ branch = input("New branch name (No spaces): ")
 clear_screen()
 
 #get token
-if 'HF_TOKEN' in os.environ:
-    #if the variable is found then write it to hf_token:
-    hf_token = os.environ['HF_TOKEN']
-    tfound = "Where are my doritos?"
-else:
-    #if the variable is not found then prompt user to provide it:
-    hf_token = input("HF_TOKEN Variable not detected. Enter your HuggingFace (WRITE) token: ")
+if get_token() == None:
+    #if the token is not found then prompt user to provide it:
+    hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
     tfound = "false"
+else:
+    #if the token is found then write it to hf_token:
+    hf_token = get_token()
+    tfound = "Where are my doritos?"
 
 #login
 login(hf_token)
+uname = "get name from token, if possible"
 
 #create or delete the branch
 if cord == 'create':
@@ -71,16 +72,10 @@ else:
         print(f"Branch deleted on {r_type} https://huggingface.co/spaces/{repo}")
 #if token wasn't found then display following text:
 if tfound == 'false':
-    print('''
-          Set HF_TOKEN to a token with WRITE permissions to skip inputting token on each run.
+    print(f'''
+          You were logged in as {uname}.
           
-          On Unix systems, edit the file ~/.bashrc with an editor of your choise.
-          On a new line add: export HF_TOKEN=Your-HuggingFace-token-here
-          (Terminal Refresh Required)
-          To temporarily set a token to the active terminal use 'export HF_TOKEN=Your-HuggingFace-token-here'
-          
-          On Windows use 'setx HF_TOKEN Your-HuggingFace-token-here'
-          (System Restart Required)
-          To temporarily set a token to the active terminal use 'set HF_TOKEN=Your-HuggingFace-token-here'
+          To logout, use the cli 'huggingface-cli logout'
+          TO view your active account, use 'huggingface-cli whoami'
           ''')
 input("Press enter to continue.")
