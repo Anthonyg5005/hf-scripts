@@ -1,9 +1,17 @@
 #import required modules
 import os
 import huggingface_hub
-from huggingface_hub import create_branch
+from huggingface_hub import create_branch, delete_branch
 
 #get user variables
+while True:
+    cord = input("What would you like to do? (create) (delete): ").lower()
+    
+    if cord not in ['create', 'delete']:
+        print("Please choose one of the two options.")
+        continue
+    
+    break
 repo = input("Repository name: ")
 while True:
     r_type = input("Repo type (model) (dataset) (space): ").lower()
@@ -28,8 +36,11 @@ else:
 #login
 huggingface_hub.login(hf_token)
 
-#create the branch
-create_branch(repo, repo_type=r_type, branch=branch)
+#create or delete the branch
+if cord == 'create':
+    create_branch(repo, repo_type=r_type, branch=branch)
+else:
+    delete_branch(repo, repo_type=r_type, branch=branch)
 
 #extra information
 #won't work if special characters are used
