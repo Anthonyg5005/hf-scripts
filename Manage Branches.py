@@ -1,7 +1,6 @@
 #import required modules
 import os
-import huggingface_hub
-from huggingface_hub import create_branch, delete_branch
+from huggingface_hub import create_branch, delete_branch, login, get_token
 
 #set clear screen function
 def clear_screen():
@@ -18,7 +17,6 @@ while True:
         clear_screen()
         print("Please choose one of the two options.")
         continue
-    
     break
 clear_screen()
 repo = input("Repository name: ")
@@ -30,7 +28,6 @@ while True:
         clear_screen()
         print("Please choose one of the three options.")
         continue
-    
     break
 clear_screen()
 branch = input("New branch name (No spaces): ")
@@ -47,7 +44,7 @@ else:
     tfound = "false"
 
 #login
-huggingface_hub.login(hf_token)
+login(hf_token)
 
 #create or delete the branch
 if cord == 'create':
