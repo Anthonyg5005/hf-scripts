@@ -34,9 +34,6 @@ branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
-
-#TODO: verify that the token is WRITE and not READ
-
 if get_token() == 'None':
     #if the token is not found then prompt user to provide it:
     hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
@@ -45,15 +42,19 @@ else:
     #if the token is found then write it to hf_token:
     hf_token = get_token()
     tfound = "Where are my doritos?"
+#if the token is read only then prompt user to provide a write token:
+while True:
+    if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
+        clear_screen()
+        print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
+        hf_token = input("Enter your HuggingFace (WRITE) token: ")
+        continue
+    break
 
 #login
 login(hf_token)
-
-
-#TODO: get fullname from whoami()
-uname = ""
-
-
+#store the user's name
+fname = whoami().get('fullname', None)
 
 #create or delete the branch
 if cord == 'create':
@@ -66,22 +67,22 @@ clear_screen()
 #won't work if special characters are used but should still successfully be created/deleted
 if cord == 'create':
     if r_type == 'model':
-        print(f"Branch created at https://huggingface.co/{repo}/tree/{branch}")
+        print(f"Branch {branch} created at https://huggingface.co/{repo}/tree/{branch}")
     elif r_type == 'dataset':
-        print(f"Branch created at https://huggingface.co/datasets/{repo}/tree/{branch}")
+        print(f"Branch {branch} created at https://huggingface.co/datasets/{repo}/tree/{branch}")
     elif r_type == 'space':
-        print(f"Branch created at https://huggingface.co/spaces/{repo}/tree/{branch}")
+        print(f"Branch {branch} created at https://huggingface.co/spaces/{repo}/tree/{branch}")
 else:
     if r_type == 'model':
-        print(f"Branch deleted on {r_type} https://huggingface.co/{repo}")
+        print(f"Branch {branch} deleted on {r_type} https://huggingface.co/{repo}")
     elif r_type == 'dataset':
-        print(f"Branch deleted on {r_type} https://huggingface.co/datasets/{repo}")
+        print(f"Branch {branch} deleted on {r_type} https://huggingface.co/datasets/{repo}")
     elif r_type == 'space':
-        print(f"Branch deleted on {r_type} https://huggingface.co/spaces/{repo}")
+        print(f"Branch {branch} deleted on {r_type} https://huggingface.co/spaces/{repo}")
 #if token wasn't found then display following text:
 if tfound == 'false':
     print(f'''
-          You were logged in as {uname}.
+          You are now logged in as {fname}.
           
           To logout, use the cli 'huggingface-cli logout'
           To view your active account, use 'huggingface-cli whoami'
