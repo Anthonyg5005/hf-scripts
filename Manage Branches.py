@@ -42,6 +42,10 @@ else:
     #if the token is found then write it to hf_token:
     hf_token = get_token()
     tfound = "Where are my doritos?"
+
+#login
+login(hf_token)
+
 #if the token is read only then prompt user to provide a write token:
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
@@ -49,10 +53,9 @@ while True:
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         hf_token = input("Enter your HuggingFace (WRITE) token: ")
         continue
+    login(hf_token)
     break
 
-#login
-login(hf_token)
 #store the user's name
 fname = whoami().get('fullname', None)
 
