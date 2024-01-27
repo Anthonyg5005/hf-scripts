@@ -52,8 +52,8 @@ while True:
         clear_screen()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         hf_token = input("Enter your HuggingFace (WRITE) token: ")
+        login(hf_token)
         continue
-    login(hf_token)
     break
 
 #store the user's name
