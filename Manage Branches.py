@@ -34,14 +34,15 @@ branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
-if 'None' in str(get_token()):
-    #if the token is not found then prompt user to provide it:
-    hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
-    tfound = "false"
-else:
+if get_token is not None:
     #if the token is found then write it to hf_token:
     hf_token = get_token()
     tfound = "Where are my doritos?"
+else:
+    #if the token is not found then prompt user to provide it:
+    hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
+    tfound = "false"
+
 
 #login
 login(hf_token)
