@@ -5,9 +5,10 @@ license: unlicense
 
 Personal scripts to automate some tasks.\
 Will try to keep external module use to a minimum, other than **huggingface_hub**.\
-Feel free to send in pull requests or use this code however you'd like.
+Feel free to send in pull requests or use this code however you'd like.\
+*[GitHub mirror](https://github.com/anthonyg5005/hf-scripts)*
 
-**For Github**: Would recommend creating pull requests and discussions on the [offical huggingface repo](https://huggingface.co/Anthonyg5005/hf-scripts)
+**For GitHub**: Would recommend creating pull requests and discussions on the [offical huggingface repo](https://huggingface.co/Anthonyg5005/hf-scripts)
 
 ## existing scripts
 
