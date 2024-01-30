@@ -53,12 +53,15 @@ while True:
     break
 
 while True:
-    yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (y/n): ").lower()
-    
-    if yorn not in ['y', 'n']:
-        clear_screen()
-        print("Please choose one of the following two options carefully.")
-        continue
+    yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (Y/n): ").lower()
+    if yorn == '':
+        yorn = y
+        break
+    else:
+        if yorn not in ['y', 'n']:
+            clear_screen()
+            print("Please choose one of the following two options carefully.")
+            continue
     break
 clear_screen()
 
