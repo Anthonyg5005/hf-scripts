@@ -1,5 +1,7 @@
 ---
 license: unlicense
+language:
+- en
 ---
 # scripts
 
@@ -16,7 +18,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- Manage branches (securing token)
+- Manage branches (securing token, confirmation)
 - Push to hf hub
 
 ## other recommended scripts
