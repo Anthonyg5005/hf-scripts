@@ -52,17 +52,27 @@ while True:
         continue
     break
 
-#store the user's name
-fname = whoami().get('fullname', None)
+while True:
+    yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (y/n): ").lower()
+    
+    if yorn not in ['y', 'n']:
+        clear_screen()
+        print("Please choose one of the following two options carefully.")
+        continue
+    break
+clear_screen()
 
 #create or delete the branch
-if cord == 'create':
-    create_branch(repo, repo_type=r_type, branch=branch)
+if yorn == 'y':
+    if cord == 'create':
+        create_branch(repo, repo_type=r_type, branch=branch)
+    else:
+        delete_branch(repo, repo_type=r_type, branch=branch)
 else:
-    delete_branch(repo, repo_type=r_type, branch=branch)
+    exit()
+clear_screen()
 
 #extra information
-clear_screen()
 #won't work if special characters are used but should still successfully be created/deleted
 if cord == 'create':
     if r_type == 'model':
@@ -81,7 +91,7 @@ else:
 #if token wasn't found then display following text:
 if tfound == 'false':
     print(f'''
-          You are now logged in as {fname}.
+          You are now logged in as {whoami().get('fullname', None)}.
           
           To logout, use the cli 'huggingface-cli logout'
           To view your active account, use 'huggingface-cli whoami'
