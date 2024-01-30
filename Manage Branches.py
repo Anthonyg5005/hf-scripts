@@ -34,26 +34,21 @@ branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
-if get_token is not None:
-    #if the token is found then write it to hf_token:
-    hf_token = get_token()
+if get_token() is not None:
+    #if the token is found then log in:
+    login(get_token())
     tfound = "Where are my doritos?"
 else:
     #if the token is not found then prompt user to provide it:
-    hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
+    login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
     tfound = "false"
-
-
-#login
-login(hf_token)
 
 #if the token is read only then prompt user to provide a write token:
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
         clear_screen()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
-        hf_token = input("Enter your HuggingFace (WRITE) token: ")
-        login(hf_token)
+        login(input("Enter your HuggingFace (WRITE) token: "))
         continue
     break
 
