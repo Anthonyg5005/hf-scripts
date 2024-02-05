@@ -56,11 +56,12 @@ while True:
         continue
     break
 
+clear_screen()
 #prompt the user for confirmation on creation/deletion of the branch
 while True:
     yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (Y/n): ").lower()
     if yorn == '':
-        yorn = y
+        yorn = 'y'
         break
     else:
         if yorn not in ['y', 'n']:
