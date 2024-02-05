@@ -2,14 +2,15 @@
 import os
 from huggingface_hub import create_branch, delete_branch, login, get_token, whoami
 
-#set clear screen function
+#define clear screen function
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 #clear screen before starting
 clear_screen()
 
-#get user variables
+#store actions into variables
+#create or delete (restricted)
 while True:
     cord = input("What would you like to do? (create) (delete): ").lower()
     
@@ -19,8 +20,10 @@ while True:
         continue
     break
 clear_screen()
+#name of effected repository
 repo = input("Repository name (User/Repo): ")
 clear_screen()
+#type of huggingface repository (restricted)
 while True:
     r_type = input("Repo type (model) (dataset) (space): ").lower()
     
@@ -30,43 +33,55 @@ while True:
         continue
     break
 clear_screen()
+#name of created or deleted branch
 branch = input("Branch name (No spaces): ")
 clear_screen()
 
 #get token
-if 'None' in str(get_token()):
-    #if the token is not found then prompt user to provide it:
-    hf_token = input("API token not detected. Enter your HuggingFace (WRITE) token: ")
-    tfound = "false"
-else:
-    #if the token is found then write it to hf_token:
-    hf_token = get_token()
+if get_token() is not None:
+    #if the token is found then log in:
+    login(get_token())
     tfound = "Where are my doritos?"
-
-#login
-login(hf_token)
+else:
+    #if the token is not found then prompt user to provide it:
+    login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
+    tfound = "false"
 
 #if the token is read only then prompt user to provide a write token:
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
         clear_screen()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
-        hf_token = input("Enter your HuggingFace (WRITE) token: ")
-        login(hf_token)
+        login(input("Enter your HuggingFace (WRITE) token: "))
         continue
     break
 
-#store the user's name
-fname = whoami().get('fullname', None)
+clear_screen()
+#prompt the user for confirmation on creation/deletion of the branch
+while True:
+    yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (Y/n): ").lower()
+    if yorn == '':
+        yorn = 'y'
+        break
+    else:
+        if yorn not in ['y', 'n']:
+            clear_screen()
+            print("Please choose one of the following two options carefully.")
+            continue
+    break
+clear_screen()
 
 #create or delete the branch
-if cord == 'create':
-    create_branch(repo, repo_type=r_type, branch=branch)
+if yorn == 'y':
+    if cord == 'create':
+        create_branch(repo, repo_type=r_type, branch=branch)
+    else:
+        delete_branch(repo, repo_type=r_type, branch=branch)
 else:
-    delete_branch(repo, repo_type=r_type, branch=branch)
-
-#extra information
+    exit()
 clear_screen()
+
+#extra information for the user
 #won't work if special characters are used but should still successfully be created/deleted
 if cord == 'create':
     if r_type == 'model':
@@ -82,12 +97,12 @@ else:
         print(f"Branch {branch} deleted on {r_type} https://huggingface.co/datasets/{repo}")
     elif r_type == 'space':
         print(f"Branch {branch} deleted on {r_type} https://huggingface.co/spaces/{repo}")
-#if token wasn't found then display following text:
+#if token wasn't found from line 36 then display following text:
 if tfound == 'false':
     print(f'''
-          You are now logged in as {fname}.
+          You are now logged in as {whoami().get('fullname', None)}.
           
-          To logout, use the cli 'huggingface-cli logout'
+          To logout, use the hf command line interface 'huggingface-cli logout'
           To view your active account, use 'huggingface-cli whoami'
           ''')
 input("Press enter to continue.")
