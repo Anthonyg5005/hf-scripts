@@ -14,10 +14,12 @@ clear_screen()
 while True:
     cord = input("What would you like to do? (create) (delete): ").lower()
     
-    if cord not in ['create', 'delete']:
+    if cord not in ['create', 'delete', 'c', 'd']:
         clear_screen()
         print("Please choose one of the following two options.")
         continue
+    if cord == 'c':
+        cord = 'create'
     break
 clear_screen()
 #name of effected repository
@@ -27,10 +29,16 @@ clear_screen()
 while True:
     r_type = input("Repo type (model) (dataset) (space): ").lower()
     
-    if r_type not in ['model', 'dataset', 'space']:
+    if r_type not in ['model', 'dataset', 'space', 'm', 'd', 's']:
         clear_screen()
         print("Please choose one of the following three options.")
         continue
+    if r_type == 'm':
+        r_type = 'model'
+    elif r_type == 'd':
+        r_type = 'dataset'
+    elif r_type == 's':
+        r_type = 'space'
     break
 clear_screen()
 #name of created or deleted branch
