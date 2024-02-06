@@ -56,11 +56,12 @@ while True:
         continue
     break
 
+clear_screen()
 #TODO prompt the user for confirmation on upload
 while True:
     yorn = input(f"Are you sure you want to REPLACE WITH ACTION (Y/n): ").lower()
     if yorn == '':
-        yorn = y
+        yorn = 'y'
         break
     else:
         if yorn not in ['y', 'n']:
