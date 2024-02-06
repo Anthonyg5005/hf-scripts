@@ -22,7 +22,7 @@ while True:
         cord = 'create'
     break
 clear_screen()
-#name of effected repository
+#name of affected repository
 repo = input("Repository name (User/Repo): ")
 clear_screen()
 #type of huggingface repository (restricted)
@@ -86,6 +86,7 @@ if yorn == 'y':
     else:
         delete_branch(repo, repo_type=r_type, branch=branch)
 else:
+    print("Cancelled action")
     exit()
 clear_screen()
 
