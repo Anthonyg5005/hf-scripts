@@ -1,5 +1,5 @@
 #import required functions
-from huggingface_hub import login, get_token
+from huggingface_hub import login, get_token, whoami
 
 #define clear screen function (not required but remove the function from code if this is removed)
 def clear_screen():
