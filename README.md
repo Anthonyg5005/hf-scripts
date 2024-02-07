@@ -32,3 +32,8 @@ Feel free to send in pull requests or use this code however you'd like.\
   
 - Download models
   - Make sure you have [requests](https://pypi.org/project/requests/) and [tqdm](https://pypi.org/project/tqdm/) installed. You can install them with '`pip install requests tqdm`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or `HF_TOKEN` environment variable.
+
+## extras
+
+- [HF login snippet](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/HF%20Login%20Snippet.py)
+  - The login method that I wrote to make fetching the token better. Could add the option to skip logging in if I figure out how to securely do it.
