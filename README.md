@@ -19,6 +19,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
 - Push to hf hub
+- Manage branches (Choose a revision to create from)
 
 ## other recommended scripts
 
