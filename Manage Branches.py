@@ -26,6 +26,8 @@ while True:
         continue
     if cord == 'c':
         cord = 'create'
+    else:
+        cord = 'delete'
     break
 clear_screen()
 #name of affected repository
