@@ -3,8 +3,14 @@ import os
 from huggingface_hub import create_branch, delete_branch, login, get_token, whoami
 
 #define clear screen function
+if os.name == 'nt':
+    osclear = 'cls'
+elif os.name == 'posix':
+    osclear = 'clear'
+else:
+    osclear = ''
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system(osclear)
 
 #clear screen before starting
 clear_screen()
@@ -44,6 +50,12 @@ clear_screen()
 #name of created or deleted branch
 branch = input("Branch name (No spaces): ")
 clear_screen()
+#promt user for revision, or clone from main
+if cord == 'create':
+    rev = input("Revision to clone from (Can be a branch name or the OID/SHA of a commit) (Empty clones main): ")
+    if rev == '':
+        rev = 'main'
+clear_screen()
 
 #get token
 if get_token() is not None:
@@ -65,24 +77,43 @@ while True:
     break
 
 clear_screen()
-#prompt the user for confirmation on creation/deletion of the branch
-while True:
-    yorn = input(f"Are you sure you want to {cord} branch '{branch}' in {repo} (Y/n): ").lower()
-    if yorn == '':
-        yorn = 'y'
+if cord == 'delete':
+    #prompt the user for confirmation on deletion of the branch
+    while True:
+        yorn = input(f"Are you sure you want to remove branch '{branch}' in {repo}? (Y/n): ").lower()
+        if yorn == '':
+            yorn = 'y'
+            break
+        else:
+            if yorn not in ['y', 'n']:
+                clear_screen()
+                print("Please choose one of the following two options carefully.")
+                continue
         break
-    else:
-        if yorn not in ['y', 'n']:
-            clear_screen()
-            print("Please choose one of the following two options carefully.")
-            continue
-    break
+else:
+    #prompt the user for confirmation on creation of the branch
+    while True:
+        yorn = input(f"Are you sure you want to clone branch '{rev}' to create branch '{branch}' in {repo}? (Y/n): ").lower()
+        if yorn == '':
+            yorn = 'y'
+        elif yorn == 'yes':
+            yorn = 'y'
+        elif yorn == 'no':
+            yorn = 'n'
+            break
+        else:
+            if yorn not in ['y', 'n']:
+                clear_screen()
+                print("Please choose one of the following two options carefully.")
+                continue
+        break
 clear_screen()
 
 #create or delete the branch
+#if user selected yes then continue, else exit
 if yorn == 'y':
     if cord == 'create':
-        create_branch(repo, repo_type=r_type, branch=branch)
+        create_branch(repo, revision=rev, repo_type=r_type, branch=branch)
     else:
         delete_branch(repo, repo_type=r_type, branch=branch)
 else:
@@ -106,7 +137,7 @@ else:
         print(f"Branch {branch} deleted on {r_type} https://huggingface.co/datasets/{repo}")
     elif r_type == 'space':
         print(f"Branch {branch} deleted on {r_type} https://huggingface.co/spaces/{repo}")
-#if token wasn't found from line 36 then display following text:
+#if token wasn't found from line 60 then display following text:
 if tfound == 'false':
     print(f'''
           You are now logged in as {whoami().get('fullname', None)}.
