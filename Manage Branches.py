@@ -65,16 +65,27 @@ if get_token() is not None:
     login(get_token())
     tfound = "Where are my doritos?"
 else:
+    #check if user in colab TODO: Kaggle
+    if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+        print('''
+              When using Google Colab, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
+              ''')
+        exit()
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
     tfound = "false"
 
 #if the token is read only then prompt user to provide a write token:
+envariable = 'false for now'
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
         clear_screen()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         login(input("Enter your HuggingFace (WRITE) token: "))
+        if os.environ.get('HF_TOKEN', None) is not None:
+            envariable = 'true'
+            if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+                envariable = 'nvm'
         continue
     break
 
@@ -146,5 +157,12 @@ if tfound == 'false':
           
           To logout, use the hf command line interface 'huggingface-cli logout'
           To view your active account, use 'huggingface-cli whoami'
+          ''')
+
+#if environ finds HF_TOKEN then display following text:
+if envariable == 'true':
+    print(f'''
+          You have the environment variable HF_TOKEN set.
+          This may interfere with the huggingface login every time script is ran.
           ''')
 input("Press enter to continue.")
