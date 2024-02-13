@@ -79,13 +79,16 @@ else:
 envariable = 'false for now'
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
+        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+            print('''
+                  Make sure you enter a 'WRITE' token as the HF_TOKEN secret key then try again.
+                  ''')
+            exit()
         clear_screen()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         login(input("Enter your HuggingFace (WRITE) token: "))
         if os.environ.get('HF_TOKEN', None) is not None:
             envariable = 'true'
-            if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
-                envariable = 'nvm'
         continue
     break
 
