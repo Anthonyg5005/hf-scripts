@@ -26,7 +26,7 @@ while True:
         continue
     if cord == 'c':
         cord = 'create'
-    else:
+    elif cord == 'd':
         cord = 'delete'
     break
 clear_screen()
