@@ -65,10 +65,16 @@ if get_token() is not None:
     login(get_token())
     tfound = "Where are my doritos?"
 else:
-    #check if user in colab TODO: Kaggle
-    if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+    if os.environ.get('COLAB_BACKEND_VERSION', None) is not None: #check if user in colab
         print('''
               When using Google Colab, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
+              Set your secrets with the key icon on the left.
+              ''')
+        exit()
+    if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
+        print('''
+              When using Google Kaggle, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
+              Set your secrets with the secrets add-on.
               ''')
         exit()
     #if the token is not found then prompt user to provide it:
@@ -79,9 +85,16 @@ else:
 envariable = 'false for now'
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
-        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None: #check if user in colab
             print('''
                   Make sure you enter a 'WRITE' token as the HF_TOKEN secret key then try again.
+                  Set your secrets with the key icon on the left.
+                  ''')
+            exit()
+        if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
+            print('''
+                  When using Google Kaggle, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
+                  Set your secrets with the secrets add-on.
                   ''')
             exit()
         clear_screen()
