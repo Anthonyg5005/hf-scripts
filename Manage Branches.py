@@ -122,7 +122,7 @@ if cord == 'delete':
 else:
     #prompt the user for confirmation on creation of the branch
     while True:
-        yorn = input(f"Are you sure you want to clone branch '{rev}' to create branch '{branch}' in {repo}? (Y/n): ").lower()
+        yorn = input(f"Are you sure you want to clone revision '{rev}' to create branch '{branch}' in {repo}? (Y/n): ").lower()
         if yorn == '':
             yorn = 'y'
         elif yorn == 'yes':
