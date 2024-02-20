@@ -3,9 +3,10 @@ import os
 from huggingface_hub import create_branch, delete_branch, login, get_token, whoami
 
 #define clear screen function
-if os.name == 'nt':
+oname = os.name
+if oname == 'nt':
     osclear = 'cls'
-elif os.name == 'posix':
+elif oname == 'posix':
     osclear = 'clear'
 else:
     osclear = ''
