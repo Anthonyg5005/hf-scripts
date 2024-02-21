@@ -86,6 +86,7 @@ while True:
           You cannot log in.
           Either set the environment variable to a (WRITE) token or remove it.
           ''')
+            input("Press enter to continue.")
             exit()
             
         if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
