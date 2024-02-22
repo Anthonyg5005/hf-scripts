@@ -1,5 +1,6 @@
 #import required functions
 from huggingface_hub import login, get_token, whoami
+import os
 
 #define clear screen function (OPTIONAL)
 oname = os.name
