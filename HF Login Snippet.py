@@ -2,8 +2,15 @@
 from huggingface_hub import login, get_token, whoami
 
 #define clear screen function (OPTIONAL)
+oname = os.name
+if oname == 'nt':
+    osclear = 'cls'
+elif oname == 'posix':
+    osclear = 'clear'
+else:
+    osclear = ''
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system(osclear)
 
 #get token
 if get_token() is not None:
@@ -18,7 +25,15 @@ else:
 #if the token is read only then prompt user to provide a write token (Only required if user needs a WRITE token, remove if READ is enough):
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
-        clear_screen() #remove if lines 4-6 removed (OPTIONAL)
+        clear_screen()
+        if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as write then display following text and exit:
+            print(f'''
+          You have the environment variable HF_TOKEN set.
+          You cannot log in.
+          Either set the environment variable to a (WRITE) token or remove it.
+          ''')
+            input("Press enter to continue.")
+            exit()
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         login(input("Enter your HuggingFace (WRITE) token: "))
         continue
