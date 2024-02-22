@@ -37,3 +37,5 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - [HF login snippet](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/HF%20Login%20Snippet.py)
   - The login method that I wrote to make fetching the token better.
+- [HF login snippet kaggle](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/HF%20Login%20Snippet%20Kaggle.py)
+  - Same as before but for cloud ipynb like Colab and Kaggle (Just adds instructions)
