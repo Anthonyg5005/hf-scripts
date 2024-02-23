@@ -88,7 +88,7 @@ else:
 while True:
     if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
         clear_screen()
-        if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as write then display following text and exit:
+        if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as read-only then display following text and exit:
             print(f'''
           You have the environment variable HF_TOKEN set.
           You cannot log in.
