@@ -1,6 +1,6 @@
 #import required modules
 import os
-from huggingface_hub import create_branch, delete_branch, login, get_token, whoami
+from huggingface_hub import create_branch, delete_branch, login, notebook_login, get_token, whoami
 
 #define clear screen function
 oname = os.name
@@ -63,19 +63,22 @@ clear_screen()
 #get token
 if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
     from kaggle_secrets import UserSecretsClient
-    if UserSecretsClient().get_secret("HF_TOKEN") is not None:
+    if UserSecretsClient().get_secret("HF_TOKEN") is not None: #login if token secret found
         login(UserSecretsClient().get_secret("HF_TOKEN"))
-    else:
+    else: #if not found, display instructions and show ipynb login
         print('''
             When using Kaggle, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
             This will prevent the need to login every time you run the script.
             Set your secrets with the secrets add-on on the top of the screen.
              ''')
+        notebook_login(write_permission=True)
+elif os.environ.get('COLAB_BACKEND_VERSION', None) is not None: #else check if user is in colab
+    if get_token() is None: #if token secret not found, display ipynb login
+        notebook_login(write_permission=True)
 if get_token() is not None:
-    if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is None:
-        #if user not in kaggle and the token is found then log in:
-        login(get_token())
-        tfound = "Where are my doritos?"
+    #if the token is found then log in:
+    login(get_token())
+    tfound = "Where are my doritos?"
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
