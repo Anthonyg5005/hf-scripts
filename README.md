@@ -34,7 +34,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 ## extras
 
-- [HF login snippet](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/HF%20Login%20Snippet.py)
+- [HF login snippet](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/HF%20Login%20Snippet.py)
   - The login method that I wrote to make fetching the token better.
-- [HF login snippet kaggle](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/HF%20Login%20Snippet%20Kaggle.py)
+- [HF login snippet kaggle](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/HF%20Login%20Snippet%20Kaggle.py)
   - Same as above but for cloud ipynb environments like Colab and Kaggle (Kaggle secret support)
