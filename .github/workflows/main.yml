@@ -1,7 +1,7 @@
 name: Clone from Hugging Face
 on:
   schedule:
-    - cron: '0 * * * *' # <-- run every hour at the start of the hour
+    - cron: '0 0 * * *' # <-- update daily
   workflow_dispatch:
 jobs:
   clone:
