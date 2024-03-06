@@ -75,7 +75,7 @@ if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in
 if get_token() is not None:
     #if the token is found then log in:
     login(get_token())
-    tfound = "Where are my doritos?"
+    tfound = "Where are my doritos?" #doesn't matter what this is, only false is used
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
@@ -87,8 +87,8 @@ while True:
         clear_screen()
         if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as read-only then display following text and exit:
             print('''
-          You have the environment variable HF_TOKEN set.
-          You cannot log in.
+                  You have the environment variable HF_TOKEN set.
+                                 You cannot log in.
           Either set the environment variable to a 'WRITE' token or remove it.
                   ''')
             input("Press enter to continue.")
