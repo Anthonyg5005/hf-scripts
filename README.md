@@ -16,7 +16,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [EXL2 Private Quant V1](https://colab.research.google.com/drive/1ssr_4iSHnfvusFLpJI-PyorzXuNpS5B5?usp=sharing) (wip, mostly working)
+- [EXL2 Private Quant V1](https://colab.research.google.com/drive/1ssr_4iSHnfvusFLpJI-PyorzXuNpS5B5?usp=sharing) **(COLAB)**
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
