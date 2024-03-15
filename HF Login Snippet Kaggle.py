@@ -17,11 +17,9 @@ if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in
 if get_token() is not None:
     #if the token is found then log in:
     login(get_token())
-    tfound = "Where are my doritos?"
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
-    tfound = "false"
 
 #if the token is read only then prompt user to provide a write token (Only required if user needs a WRITE token, remove if READ is enough):
 while True:
