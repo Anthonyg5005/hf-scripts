@@ -17,7 +17,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [EXL2 Private Quant V2](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/EXL2_Private_Quant_V2.ipynb) **(COLAB)** testing, will potentially be available within two hours of this update, in files for now.
+- [EXL2 Private Quant V2](https://colab.research.google.com/drive/1BBSkG5XHCbDADp6hoENftIswI82ehY96?usp=sharing) **(COLAB)**
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
