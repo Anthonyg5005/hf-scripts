@@ -17,12 +17,12 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [EXL2 Private Quant V2](https://colab.research.google.com/drive/1BBSkG5XHCbDADp6hoENftIswI82ehY96?usp=sharing) **(COLAB)**
+- [EXL2 Private Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- EXL2 Private Quant V3
-  - Allow for converting jsonl to parquet and bin to safetensors
+- EXL2 Private Quant V4
+  - Automatic detections
 
 - Auto exl2 upload ipynb
   - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
