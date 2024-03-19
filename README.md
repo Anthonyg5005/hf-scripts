@@ -26,7 +26,7 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - Auto exl2 upload ipynb
   - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
-  - Also batch/bash scripts afterwards for non jupyterlab environments
+  - Also Windows/Linux supported scripts afterwards for non jupyterlab environments (don't have mac)
 
 - Upload folder
   - Will allow to upload a folder to existing or new repo
