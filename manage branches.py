@@ -117,6 +117,10 @@ if cord == 'delete':
         yorn = input(f"Are you sure you want to remove branch '{branch}' in {repo}? (Y/n): ").lower()
         if yorn == '':
             yorn = 'y'
+        elif yorn == 'yes':
+            yorn = 'y'
+        elif yorn == 'no':
+            yorn = 'n'
             break
         else:
             if yorn not in ['y', 'n']:
