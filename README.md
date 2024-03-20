@@ -29,7 +29,7 @@ Feel free to send in pull requests or use this code however you'd like.\
   - Also Windows/Linux supported scripts afterwards for non jupyterlab environments (don't have mac)
 
 - Upload folder
-  - Will allow to upload a folder to existing or new repo
+  - Uploads user specified folder to specified repo, can create private repos too
 
 ## other recommended files
 
