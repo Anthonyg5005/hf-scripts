@@ -28,7 +28,7 @@ Feel free to send in pull requests or use this code however you'd like.\
   - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
   - Also Windows/Linux supported scripts afterwards for non jupyterlab environments (don't have mac)
 
-- Upload folder
+- [Upload folder](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/upload%20to%20hub.py)
   - Uploads user specified folder to specified repo, can create private repos too
 
 ## other recommended files
