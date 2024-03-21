@@ -61,7 +61,11 @@ if repo_exists(repo, repo_type=r_type) == False:
         break
 clear_screen()
 
-#TODO revision
+c_mes = input("Commit message (optional): ")
+if c_mes == "":
+    c_mes = "Uploaded folder with huggingface_hub"
+
+#TODO revision support. if branch not automatically created, create before uploading
 
 #get token
 if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
@@ -117,7 +121,7 @@ clear_screen()
 #upload the folder
 if priv == "y":
     create_repo(repo, repo_type=r_type, private=True) #if private chosen, create private repo first
-HfApi().upload_folder(folder_path=up_dir, repo_id=repo, repo_type=r_type)
+HfApi().upload_folder(folder_path=up_dir, repo_id=repo, repo_type=r_type, commit_message=c_mes)
 
 if r_type == 'model':
     print(f"Repository created at https://huggingface.co/{repo}")
