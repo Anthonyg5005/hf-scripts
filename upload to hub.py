@@ -1,6 +1,6 @@
 #import required functions
 import os
-from huggingface_hub import login, get_token, whoami, HfApi, create_repo, repo_exists
+from huggingface_hub import login, get_token, whoami, HfApi, create_repo, repo_exists, list_repo_refs, create_branch
 
 #define clear screen function
 oname = os.name
@@ -91,6 +91,7 @@ while True:
     elif r_type == 's':
         r_type = 'space'
     break
+clear_screen()
 
 #if new, ask to create private
 priv = "nothing yet"
@@ -117,14 +118,50 @@ clear_screen()
 #ask for optional commit message
 c_mes = input("Commit message (optional): ")
 if c_mes == "":
-    c_mes = "Uploaded folder with huggingface_hub"
+    c_mes = "Uploaded files with huggingface_hub"
+clear_screen()
 
-#TODO revision support. if branch not automatically created, create before uploading
+#ask for optional branch name
+rev = input("Branch name (empty for main): ")
+if rev == "":
+    rev = "main"
+clear_screen()
 
-#upload the folder
+#if branch doesn't exist, ask to create it
+if not any(branch.name == rev for branch in list_repo_refs(repo, repo_type=r_type).branches):
+    while True:
+        c_rev = input(f"No existing branch '{rev}' found, create new branch? (Y/n): ").lower()
+        if c_rev == '':
+            c_rev = 'y'
+        elif c_rev == 'yes':
+            c_rev = 'y'
+        elif c_rev == 'no':
+            c_rev = 'n'
+            break
+        else:
+            if c_rev not in ['y', 'n']:
+                clear_screen()
+                print("Please choose one of the following two options.")
+                continue
+        break
+    if c_rev == 'n':
+        exit()
+    else:
+        create_branch(repo, branch=rev, repo_type=r_type)
+clear_screen()
+
+#ask for optional path in repo
+r_path = input("Path in repo (empty for root): ")
+if r_path == "":
+    r_path = "."
+
+#upload the folder, create the repo if new
 if priv == "y":
     create_repo(repo, repo_type=r_type, private=True) #if private chosen, create private repo first
-HfApi().upload_folder(folder_path=up_dir, repo_id=repo, repo_type=r_type, commit_message=c_mes)
+else:
+    if new_r == True:
+        create_repo(repo, repo_type=r_type, private=False) #if public chosen, create public repo first
+HfApi().upload_folder(folder_path=up_dir, repo_id=repo, repo_type=r_type, commit_message=c_mes, revision=rev, path_in_repo=r_path)
 
 #Show user new repo
 if new_r == True:
