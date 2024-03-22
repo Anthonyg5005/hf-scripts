@@ -49,13 +49,13 @@ while True:
                   ''')
             input("Press enter to continue.")
             exit()
-        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
+        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None: #read-only colab secret key found
             print('''
                               Your Colab secret key is read-only
                 Please switch your key to 'write' or disable notebook access on the left.
                                For now, you are stuck in a loop
                   ''')
-        elif os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None:
+        elif os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #read-only kaggle secret key found
             print('''
                                       Your Kaggle secret key is read-only
                 Please switch your key to 'write' or unattach from notebook in add-ons at the top.
@@ -92,11 +92,13 @@ while True:
         r_type = 'space'
     break
 
-#if new, ask for private
+#if new, ask to create private
 priv = "nothing yet"
+new_r = False
 if repo_exists(repo, repo_type=r_type) == False:
+    new_r = True
     while True:
-        priv = input(f"Create private repository? (y/N): ").lower()
+        priv = input(f"No existing repo found, create private repository? (y/N): ").lower()
         if priv == '':
             priv = 'n'
         elif priv == 'yes':
@@ -112,6 +114,7 @@ if repo_exists(repo, repo_type=r_type) == False:
         break
 clear_screen()
 
+#ask for optional commit message
 c_mes = input("Commit message (optional): ")
 if c_mes == "":
     c_mes = "Uploaded folder with huggingface_hub"
@@ -123,13 +126,16 @@ if priv == "y":
     create_repo(repo, repo_type=r_type, private=True) #if private chosen, create private repo first
 HfApi().upload_folder(folder_path=up_dir, repo_id=repo, repo_type=r_type, commit_message=c_mes)
 
-if r_type == 'model':
-    print(f"Repository created at https://huggingface.co/{repo}")
-elif r_type == 'dataset':
-    print(f"Repository created at https://huggingface.co/datasets/{repo}")
-elif r_type == 'space':
-    print(f"Repository created at https://huggingface.co/spaces/{repo}")
+#Show user new repo
+if new_r == True:
+    if r_type == 'model':
+        print(f"Repository created at https://huggingface.co/{repo}")
+    elif r_type == 'dataset':
+        print(f"Repository created at https://huggingface.co/datasets/{repo}")
+    elif r_type == 'space':
+        print(f"Repository created at https://huggingface.co/spaces/{repo}")
 
+#if token wasn't found, (new log in) show user's name.
 if tfound == 'false':
     print(f'''
               You are now logged in as {whoami().get('fullname', None)}.
