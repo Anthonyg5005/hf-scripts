@@ -19,6 +19,8 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - [EXL2 Private Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
+- [Upload folder to repo](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
+
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
 - EXL2 Private Quant V4
@@ -28,9 +30,6 @@ Feel free to send in pull requests or use this code however you'd like.\
   - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
   - Windows/Linux support (don't have mac)
   - Colab version will use this with markdown parameters
-
-- [Upload folder](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/upload%20to%20hub.py)
-  - Uploads user specified folder to specified repo, can create private repos too
 
 ## other recommended files
 
@@ -43,6 +42,9 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 - EXL2 Private Quant
   - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested.
+ 
+- Upload folder to repo
+  - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files.
   
 - Download models
   - Make sure you have [requests](https://pypi.org/project/requests/) and [tqdm](https://pypi.org/project/tqdm/) installed. You can install them with '`pip install requests tqdm`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
