@@ -16,57 +16,6 @@ def clear_screen():
 #clear before starting
 clear_screen()
 
-#store actions into variables
-#upload directory
-up_dir = input("Enter the directory you want to upload: ")
-clear_screen()
-
-#name of affected repository
-repo = input("Repository name (User/Repo): ")
-clear_screen()
-
-#type of huggingface repository (restricted)
-while True:
-    r_type = input("Repo type (model) (dataset) (space): ").lower()
-    
-    if r_type not in ['model', 'dataset', 'space', 'm', 'd', 's']:
-        clear_screen()
-        print("Please choose one of the following three options.")
-        continue
-    if r_type == 'm':
-        r_type = 'model'
-    elif r_type == 'd':
-        r_type = 'dataset'
-    elif r_type == 's':
-        r_type = 'space'
-    break
-
-#if new, ask for private
-priv = "nothing yet"
-if repo_exists(repo, repo_type=r_type) == False:
-    while True:
-        priv = input(f"Create private repository? (y/N): ").lower()
-        if priv == '':
-            priv = 'n'
-        elif priv == 'yes':
-            priv = 'y'
-        elif priv == 'no':
-            priv = 'n'
-            break
-        else:
-            if priv not in ['y', 'n']:
-                clear_screen()
-                print("Please choose one of the following two options.")
-                continue
-        break
-clear_screen()
-
-c_mes = input("Commit message (optional): ")
-if c_mes == "":
-    c_mes = "Uploaded folder with huggingface_hub"
-
-#TODO revision support. if branch not automatically created, create before uploading
-
 #get token
 if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
     from kaggle_secrets import UserSecretsClient
@@ -117,6 +66,57 @@ while True:
         continue
     break
 clear_screen()
+
+#store actions into variables
+#upload directory
+up_dir = input("Enter the directory you want to upload: ")
+clear_screen()
+
+#name of affected repository
+repo = input("Repository name (User/Repo): ")
+clear_screen()
+
+#type of huggingface repository (restricted)
+while True:
+    r_type = input("Repo type (model) (dataset) (space): ").lower()
+    
+    if r_type not in ['model', 'dataset', 'space', 'm', 'd', 's']:
+        clear_screen()
+        print("Please choose one of the following three options.")
+        continue
+    if r_type == 'm':
+        r_type = 'model'
+    elif r_type == 'd':
+        r_type = 'dataset'
+    elif r_type == 's':
+        r_type = 'space'
+    break
+
+#if new, ask for private
+priv = "nothing yet"
+if repo_exists(repo, repo_type=r_type) == False:
+    while True:
+        priv = input(f"Create private repository? (y/N): ").lower()
+        if priv == '':
+            priv = 'n'
+        elif priv == 'yes':
+            priv = 'y'
+        elif priv == 'no':
+            priv = 'n'
+            break
+        else:
+            if priv not in ['y', 'n']:
+                clear_screen()
+                print("Please choose one of the following two options.")
+                continue
+        break
+clear_screen()
+
+c_mes = input("Commit message (optional): ")
+if c_mes == "":
+    c_mes = "Uploaded folder with huggingface_hub"
+
+#TODO revision support. if branch not automatically created, create before uploading
 
 #upload the folder
 if priv == "y":
