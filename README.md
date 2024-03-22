@@ -24,9 +24,10 @@ Feel free to send in pull requests or use this code however you'd like.\
 - EXL2 Private Quant V4
   - Automatic detections
 
-- Auto exl2 upload ipynb
+- Auto exl2 upload script
   - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
-  - Also Windows/Linux supported scripts afterwards for non jupyterlab environments (don't have mac)
+  - Windows/Linux support (don't have mac)
+  - Colab version will use this with markdown parameters
 
 - [Upload folder](https://huggingface.co/Anthonyg5005/hf-scripts/blob/unfinished/upload%20to%20hub.py)
   - Uploads user specified folder to specified repo, can create private repos too
@@ -41,7 +42,7 @@ Feel free to send in pull requests or use this code however you'd like.\
   - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). May get some updates in the future for handling more situations. All active updates will be on the [unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch. Colab and Kaggle keys are supported.
 
 - EXL2 Private Quant
-  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested. Currently being built to later on become the base of `'Auto exl2 upload ipynb'`.
+  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested.
   
 - Download models
   - Make sure you have [requests](https://pypi.org/project/requests/) and [tqdm](https://pypi.org/project/tqdm/) installed. You can install them with '`pip install requests tqdm`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
