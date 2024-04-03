@@ -1,6 +1,7 @@
 #import required functions
 from huggingface_hub import login, get_token, whoami
 import os
+import sys
 
 #define clear screen function (OPTIONAL)
 oname = os.name
@@ -34,7 +35,7 @@ while True:
           Either set the environment variable to a (WRITE) token or remove it.
           ''')
             input("Press enter to continue.")
-            exit()
+            sys.exit("Exiting...")
         print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
         login(input("Enter your HuggingFace (WRITE) token: "))
         continue
