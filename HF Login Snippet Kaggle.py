@@ -1,5 +1,6 @@
 #import required functions
 import os
+import sys
 from huggingface_hub import login, get_token, whoami
 
 #get token
@@ -31,13 +32,13 @@ while True:
           Either set the environment variable to a 'WRITE' token or remove it.
                   ''')
             input("Press enter to continue.")
-            exit()
+            sys.exit("Exiting...")
         if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
             print('''
                               Your Colab secret key is read-only
                 Please switch your key to 'write' or disable notebook access on the left.
-                               For now, you are stuck in a loop
                   ''')
+            sys.exit("Stuck in a loop, exiting...")
         elif os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None:
             print('''
                                       Your Kaggle secret key is read-only
