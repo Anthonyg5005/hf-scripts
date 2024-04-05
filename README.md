@@ -40,7 +40,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - EXL2 Private Quant
   - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested.
- 
+
 - Upload folder to repo
   - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files.
   

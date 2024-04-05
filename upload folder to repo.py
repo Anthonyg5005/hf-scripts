@@ -18,8 +18,8 @@ clear_screen()
 
 #get token
 if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
-    from kaggle_secrets import UserSecretsClient
-    from kaggle_web_client import BackendError
+    from kaggle_secrets import UserSecretsClient # type: ignore
+    from kaggle_web_client import BackendError # type: ignore
     try:
         login(UserSecretsClient().get_secret("HF_TOKEN")) #login if token secret found
     except BackendError: 
