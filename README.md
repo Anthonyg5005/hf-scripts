@@ -24,7 +24,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - Auto exl2 upload script
   - Will create repo and create 5 custom quants on individual branches
-  - Windows/Linux support (don't have mac to test)
+  - Windows/Linux support
 
 ## other recommended stuff
 
