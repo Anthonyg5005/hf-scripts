@@ -6,9 +6,8 @@ language:
 # scripts
 
 Personal scripts to automate some tasks.\
-Most of this is to get me familiar with python and hf_hub.\
 Will try to keep external module use to a minimum, other than **huggingface_hub**.\
-Feel free to send in pull requests or use this code however you'd like.\
+Feel free to send in PRs or use this code however you'd like.\
 *[GitHub mirror](https://github.com/anthonyg5005/hf-scripts)*
 
 **For GitHub**: Would recommend creating pull requests and discussions on the [offical huggingface repo](https://huggingface.co/Anthonyg5005/hf-scripts)
@@ -23,15 +22,14 @@ Feel free to send in pull requests or use this code however you'd like.\
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- EXL2 Private Quant V4
-  - Automatic detections
-
 - Auto exl2 upload script
-  - Will create repo and have quants from 2-6 bpw (or custom) on individual branches
-  - Windows/Linux support (don't have mac)
-  - Colab version will use this with markdown parameters
+  - Will create repo and create 5 custom quants on individual branches
+  - Windows/Linux support (don't have mac to test)
 
-## other recommended files
+## other recommended stuff
+
+- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot by the Bloke and Lambda Labs available.
+  - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
 
 - [Download models (download HF Hub models) [Oobabooga]](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py)
 
@@ -47,7 +45,7 @@ Feel free to send in pull requests or use this code however you'd like.\
   - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files.
   
 - Download models
-  - Make sure you have [requests](https://pypi.org/project/requests/) and [tqdm](https://pypi.org/project/tqdm/) installed. You can install them with '`pip install requests tqdm`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
+  - Make sure you have [huggingface_hub](https://pypi.org/project/huggingface-hub/) installed as it has the same dependencies. You can install it with '`pip install huggingface-hub`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
 
 ## extras
 
