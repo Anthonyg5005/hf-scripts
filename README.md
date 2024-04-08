@@ -1,5 +1,5 @@
 ---
-license: unlicense
+license: agpl-3.0
 language:
 - en
 ---
