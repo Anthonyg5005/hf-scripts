@@ -16,7 +16,9 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [EXL2 Private Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
+- [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
+
+- [EXL2 Local Quant Windows](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-windows-local/exl2-windows-local.zip?download=true)
 
 - [Upload folder to repo](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
 
@@ -38,8 +40,11 @@ Feel free to send in PRs or use this code however you'd like.\
 - Manage branches
   - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). May get some updates in the future for handling more situations. All active updates will be on the [unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch. Colab and Kaggle keys are supported.
 
-- EXL2 Private Quant
-  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested.
+- EXL2 Single Quant
+  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested. Only 7B tested on colab.
+
+- EXL2 Local Quant Windows
+  - Easily creates environment to quantize models to exl2 using Windows to your local machine.
 
 - Upload folder to repo
   - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files.
