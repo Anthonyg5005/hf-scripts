@@ -1,3 +1,5 @@
+@echo off
+
 set /p "model=Folder name: "
 set /p "bpw=Target BPW: "
 mkdir %model%-exl2-%bpw%bpw

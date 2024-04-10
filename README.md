@@ -18,7 +18,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
-- [EXL2 Local Quant Windows](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-windows-local/exl2-windows-local.zip?download=true) (Windows defender flags as a virus, fix in progress)
+- [EXL2 Local Quant Windows](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-windows-local/exl2-windows-local.zip?download=true)
 
 - [Upload folder to repo](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
 

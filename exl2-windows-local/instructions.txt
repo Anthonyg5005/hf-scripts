@@ -9,5 +9,5 @@ https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Windows&targ
 Haven't done much testing but Visual Studio with desktop development for C++ might be required. I've gotten cl.exe errors on a previous install
 
 make sure you setup the environment by using windows-setup.bat
-after everything is done just download a model using "download multiple models.ps1" set the number of models to download, then enter the model directory(s)
+after everything is done just download a model using download-model.bat
 to quant, use convert-model-auto.bat. Enter the model's folder name, then the BPW for the model

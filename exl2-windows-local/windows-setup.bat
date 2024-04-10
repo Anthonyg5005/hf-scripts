@@ -48,7 +48,7 @@ venv\scripts\python.exe -m pip install -r exllamav2/requirements.txt -q
 venv\scripts\python.exe -m pip install huggingface-hub -q
 venv\scripts\python.exe -m pip install .\exllamav2 -q
 
-move "download multiple models.ps1" exllamav2
+move download-model.bat exllamav2
 move convert-model-auto.bat exllamav2
 move download-model.py exllamav2
 move venv exllamav2
