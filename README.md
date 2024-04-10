@@ -30,7 +30,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 ## other recommended stuff
 
-- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot by the Bloke and Lambda Labs available.
+- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and managed by kaltcit.
   - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
 
 - [Download models (download HF Hub models) [Oobabooga]](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py)
