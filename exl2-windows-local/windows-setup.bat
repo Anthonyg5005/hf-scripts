@@ -28,10 +28,10 @@ set /p cuda_version="Please enter your CUDA version (11 or 12): "
 
 if "%cuda_version%"=="11" (
     echo Installing PyTorch for CUDA 11.8...
-    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu118 -q --upgrade
+    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu118 --upgrade
 ) else if "%cuda_version%"=="12" (
     echo Installing PyTorch for CUDA 12.1...
-    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu121 -q --upgrade
+    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu121 --upgrade
 ) else (
     echo Invalid CUDA version. Please enter 11 or 12.
     pause
@@ -44,9 +44,9 @@ git clone https://github.com/turboderp/exllamav2
 
 echo Installing pip packages...
 
-venv\scripts\python.exe -m pip install -r exllamav2/requirements.txt -q
-venv\scripts\python.exe -m pip install huggingface-hub -q
-venv\scripts\python.exe -m pip install .\exllamav2 -q
+venv\scripts\python.exe -m pip install -r exllamav2/requirements.txt
+venv\scripts\python.exe -m pip install huggingface-hub
+venv\scripts\python.exe -m pip install .\exllamav2
 
 move download-model.bat exllamav2
 move convert-model-auto.bat exllamav2
