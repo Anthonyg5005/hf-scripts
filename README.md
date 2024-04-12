@@ -25,7 +25,7 @@ Feel free to send in PRs or use this code however you'd like.\
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
 - Auto exl2 upload script
-  - Will create repo and create 5 custom quants on individual branches
+  - Will create repo and create a specified number of custom quants on individual branches
   - Windows/Linux support
 
 ## other recommended stuff
