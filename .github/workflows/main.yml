@@ -7,20 +7,28 @@ jobs:
   clone:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4.1.2
         with:
+          repository: Anthonyg5005/hf-scripts
+          ref: main
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          persist-credentials: true
+          path: 'hf-scripts'
+          clean: true
           fetch-depth: 0
-          lfs: true
+          lfs: false
+          submodules: true
+          set-safe-directory: true
+          github-server-url: 'https://github.com'
       - name: Clone from Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_ACCESS_TOKEN }}
           github_token: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
-          git clone https://Anthonyg5005:$HF_TOKEN@huggingface.co/Anthonyg5005/hf-scripts
-          cd hf-scripts
+          git clone https://Anthonyg5005:$HF_TOKEN@huggingface.co/Anthonyg5005/hf-scripts mirror
+          cd mirror
           
           # Now, push to the original GitHub repository with username and token
           git remote set-url origin https://Anthonyg5005:${{ secrets.WORKFLOW_TOKEN }}@github.com/Anthonyg5005/hf-scripts.git
           git push --mirror
-
-          #AI Generated code, don't know how to use gh actions
