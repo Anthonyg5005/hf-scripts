@@ -53,7 +53,6 @@ else:
         print("Skipping login... (Unable to access private or gated models)")
         tfound = "false but skipped" #doesn't matter what this is, only false is used
         time.sleep(3)
-
 clear_screen()
 
 #get original model repo url

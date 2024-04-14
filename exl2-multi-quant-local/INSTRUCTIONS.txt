@@ -1,10 +1,10 @@
 For NVIDIA cards install the CUDA toolkit
 
 Nvidia Maxwell or higher
-https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64
+https://developer.nvidia.com/cuda-downloads
 
 Nvidia Kepler or higher
-https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Windows&target_arch=x86_64
+https://developer.nvidia.com/cuda-11-8-0-download-archive
 
 
 Haven't done much testing but for Windows, Visual Studio with desktop development for C++ might be required. I've gotten cl.exe errors on a previous install
