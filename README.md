@@ -16,7 +16,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [Auto EXL2 upload](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/auto-exl2-upload/auto-exl2-upload.zip?download=true)
+- [Auto EXL2 upload](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/auto-exl2-upload/auto-exl2-upload.zip?download=true)
 
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
