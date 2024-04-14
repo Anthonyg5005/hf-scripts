@@ -1,10 +1,11 @@
 #usually it's what is on the inside that counts, not this time. This script is a mess, but at least it works.
 #import required modules
-from huggingface_hub import login, get_token, whoami, repo_exists, file_exists, upload_folder, create_repo, upload_file, create_branch
+from huggingface_hub import login, get_token, whoami, repo_exists
 import os
 import sys
 import subprocess
 import glob
+import time
 
 #define os differences
 oname = os.name
@@ -42,40 +43,17 @@ if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in
 if get_token() is not None:
     #if the token is found then log in:
     login(get_token())
-    tfound = "Where are my doritos?" #doesn't matter what this is, only false is used
+    tfound = "true" 
 else:
     #if the token is not found then prompt user to provide it:
-    login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
     tfound = "false"
+    try:
+        login(input("API token not detected. Enter your HuggingFace token (empty to skip): "))
+    except:
+        print("Skipping login... (Unable to access private or gated models)")
+        tfound = "false but skipped" #doesn't matter what this is, only false is used
+        time.sleep(3)
 
-#if the token is read only then prompt user to provide a write token:
-while True:
-    if whoami().get('auth', {}).get('accessToken', {}).get('role', None) != 'write':
-        clear_screen()
-        if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as read-only then display following text and exit:
-            print('''
-                  You have the environment variable HF_TOKEN set.
-                                 You cannot log in.
-          Either set the environment variable to a 'WRITE' token or remove it.
-                  ''')
-            input("Press enter to continue.")
-            sys.exit("Exiting...")
-        if os.environ.get('COLAB_BACKEND_VERSION', None) is not None:
-            print('''
-                              Your Colab secret key is read-only
-                Please switch your key to 'write' or disable notebook access on the left.
-                  ''')
-            sys.exit("Stuck in loop, exiting...")
-        elif os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None:
-            print('''
-                                      Your Kaggle secret key is read-only
-                Please switch your key to 'write' or unattach from notebook in add-ons at the top.
-                          Having a read-only key attched will require login every time.
-                ''')
-        print("You do not have write access to this repository. Please use a valid token with (WRITE) access.")
-        login(input("Enter your HuggingFace (WRITE) token: "))
-        continue
-    break
 clear_screen()
 
 #get original model repo url
@@ -132,28 +110,6 @@ if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model e
         sys.exit("Can't quantize a non-safetensors model. Exiting...")
 clear_screen()
 
-#create new repo if one doesn't already exist
-if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
-    print("Creating model repository...")
-    create_repo(f"{whoami().get('name', None)}/{modelname}-exl2", private=True)
-    print(f"Created repo at https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2") #notify user of repo creation
-
-    #create the markdown file
-    print("Writing model card...")
-    with open('./README.md', 'w') as file:
-        file.write(f"# Exl2 quants for [{modelname}](https://huggingface.co/{repo_url})\n\n")
-        file.write("## Automatically quantized using the auto quant from [hf-scripts](https://huggingface.co/anthonyg5005/hf-scripts)\n\n")
-        file.write(f"Would recommend {whoami().get('name', None)} to change up this README to include more info.\n\n")
-        file.write("### BPW:\n\n")
-        for bpw in bpwvalue:
-            file.write(f"[{bpw}](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/tree/{bpw}bpw)\n\n")
-    print("Created README.md")
-
-    upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add temp README") #upload md file
-    print("Uploaded README.md to main")
-else:
-    input("repo already exists, are you resuming a previous process? (Press enter to continue, ctrl+c to exit)")
-
 #start converting
 for bpw in bpwvalue:
     if os.path.exists(f"{model}-measure{slsh}measurement.json"): # Check if measurement.json exists
@@ -164,10 +120,10 @@ for bpw in bpwvalue:
         mskip = ""
     print(f"Starting quantization for BPW {bpw}")
     os.makedirs(f"{model}-exl2-{bpw}bpw-WD", exist_ok=True) #create working directory
-    os.makedirs(f"{model}-exl2-{bpw}bpw", exist_ok=True) #create compile full directory
+    os.makedirs(f"{modelname}-exl2-quants{slsh}{modelname}-exl2-{bpw}bpw", exist_ok=True) #create compile full directory
     subprocess.run(f"{oscp} models{slsh}{model}{slsh}config.json {model}-exl2-{bpw}bpw-WD", shell=True) #copy config to working directory
     #more settings exist in the convert.py script, to veiw them go to docs/convert.md or https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
-    result = subprocess.run(f"{pyt} exllamav2/convert.py -i models/{model} -o {model}-exl2-{bpw}bpw-WD -cf {model}-exl2-{bpw}bpw -b {bpw}{mskip}", shell=True) #run quantization and exit if failed (Credit to turbo for his dedication to exl2)
+    result = subprocess.run(f"{pyt} exllamav2/convert.py -i models/{model} -o {model}-exl2-{bpw}bpw-WD -cf {modelname}-exl2-quants{slsh}{modelname}-exl2-{bpw}bpw -b {bpw}{mskip}", shell=True) #run quantization and exit if failed (Credit to turbo for his dedication to exl2)
     if result.returncode != 0:
         print("Quantization failed.")
         sys.exit("Exiting...")
@@ -175,19 +131,7 @@ for bpw in bpwvalue:
         os.makedirs(f"{model}-measure", exist_ok=True) #create measurement directory
         subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json {model}-measure", shell=True) #copy measurement to measure directory
         open(f"{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
-    try:
-        create_branch(f"{whoami().get('name', None)}/{modelname}-exl2", branch=f"{bpw}bpw") #create branch
-    except:
-        print(f"Branch {bpw} already exists, trying upload...")
-    upload_folder(folder_path=f"{model}-exl2-{bpw}bpw", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message=f"Add quant for BPW {bpw}", revision=f"{bpw}bpw") #upload quantized model
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
-    subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw", shell=True) #remove compile directory
-
-if file_exists(f"{whoami().get('name', None)}/{modelname}-exl2", "measurement.json") == False: #check if measurement.json exists in main
-    upload_file(path_or_fileobj=f"{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
-    
-print(f'''Quants available at https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2
-      \nRepo is private, go to https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/settings to make public if you'd like.''')
 
 if tfound == 'false':
     print(f'''
@@ -196,3 +140,5 @@ if tfound == 'false':
           To logout, use the hf command line interface 'huggingface-cli logout'
                To view your active account, use 'huggingface-cli whoami'
           ''')
+    
+print("Finished quantizing. Exiting...")
