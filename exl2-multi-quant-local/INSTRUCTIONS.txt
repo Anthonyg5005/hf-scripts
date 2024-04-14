@@ -21,7 +21,7 @@ After setup is complete then you'll have a file called start-quant. Use this to 
 Make sure that your storage space is 3x the amount of the model's size plus 1 more time per quant. To mesure this, take the number of billion parameters and mutliply by two, afterwards mutliply by 3 and that's the recommended storage. There's a chance you may get away with 2.5x the size as well.
 Make sure to also have a lot of RAM depending on the model.
 
-If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the finished BPW as it will start from the beginning. You may also use ctrl + c pause at any time during the quant process.
+If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the BPW of completed quants as it will start from the beginning. You may also use ctrl + c pause at any time during the quant process.
 
 To add more options to the quantization process, you can add them to line 126. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
 
