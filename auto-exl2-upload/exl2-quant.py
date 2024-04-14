@@ -156,9 +156,9 @@ else:
 
 #start converting
 for bpw in bpwvalue:
-    if os.path.exists(f"{model}-measure{slsh}measurement.json"): # Check if measurement.json exists
+    if os.path.exists(f"measurements{slsh}{model}-measure{slsh}measurement.json"): # Check if measurement.json exists
         cmdir = False
-        mskip = f" -m {model}-measure{slsh}measurement.json" #skip measurement if it exists
+        mskip = f" -m measurements{slsh}{model}-measure{slsh}measurement.json" #skip measurement if it exists
     else:
         cmdir = True
         mskip = ""
@@ -172,8 +172,8 @@ for bpw in bpwvalue:
         print("Quantization failed.")
         sys.exit("Exiting...")
     if cmdir == True:
-        os.makedirs(f"{model}-measure", exist_ok=True) #create measurement directory
-        subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json {model}-measure", shell=True) #copy measurement to measure directory
+        os.makedirs(f"measurements{slsh}{model}-measure", exist_ok=True) #create measurement directory
+        subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json measurements{slsh}{model}-measure", shell=True) #copy measurement to measure directory
         open(f"{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
     try:
         create_branch(f"{whoami().get('name', None)}/{modelname}-exl2", branch=f"{bpw}bpw") #create branch
@@ -184,7 +184,7 @@ for bpw in bpwvalue:
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw", shell=True) #remove compile directory
 
 if file_exists(f"{whoami().get('name', None)}/{modelname}-exl2", "measurement.json") == False: #check if measurement.json exists in main
-    upload_file(path_or_fileobj=f"{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
+    upload_file(path_or_fileobj=f"measurements{slsh}{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
     
 print(f'''Quants available at https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2
       \nRepo is private, go to https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/settings to make public if you'd like.''')

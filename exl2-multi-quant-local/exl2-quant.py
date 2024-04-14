@@ -112,9 +112,9 @@ clear_screen()
 
 #start converting
 for bpw in bpwvalue:
-    if os.path.exists(f"{model}-measure{slsh}measurement.json"): # Check if measurement.json exists
+    if os.path.exists(f"measurements{slsh}{model}-measure{slsh}measurement.json"): # Check if measurement.json exists
         cmdir = False
-        mskip = f" -m {model}-measure{slsh}measurement.json" #skip measurement if it exists
+        mskip = f" -m measurements{slsh}{model}-measure{slsh}measurement.json" #skip measurement if it exists
     else:
         cmdir = True
         mskip = ""
@@ -128,8 +128,8 @@ for bpw in bpwvalue:
         print("Quantization failed.")
         sys.exit("Exiting...")
     if cmdir == True:
-        os.makedirs(f"{model}-measure", exist_ok=True) #create measurement directory
-        subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json {model}-measure", shell=True) #copy measurement to measure directory
+        os.makedirs(f"measurements{slsh}{model}-measure", exist_ok=True) #create measurement directory
+        subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json measurements{slsh}{model}-measure", shell=True) #copy measurement to measure directory
         open(f"{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
 
