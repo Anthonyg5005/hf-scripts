@@ -16,17 +16,18 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
+- [Auto EXL2 upload](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/auto-exl2-upload/auto-exl2-upload.zip?download=true)
+
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
-- [EXL2 Local Quant Windows](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-windows-local/exl2-windows-local.zip?download=true)
+- [EXL2 Local Quant - Windows](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-windows-local/exl2-windows-local.zip?download=true)
 
-- [Upload folder to repo](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
+- [Upload folder to HF](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- Auto exl2 upload script
-  - Will create repo and create a specified number of custom quants on individual branches
-  - Windows/Linux support
+- EXL2 Multi Quant local
+  - Will replace Local Quant Windows on this readme, and have Linux support. Modified version of Auto EXL2 upload without the upload and deleting part.
 
 ## other recommended stuff
 
@@ -38,19 +39,22 @@ Feel free to send in PRs or use this code however you'd like.\
 ## usage
 
 - Manage branches
-  - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). May get some updates in the future for handling more situations. All active updates will be on the [unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch. Colab and Kaggle keys are supported.
+  - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). Colab and Kaggle secret keys are supported.
 
-- EXL2 Single Quant
-  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Should work on any Linux jupyterlab server with CUDA, ROCM should be supported by exl2 but not tested. Only 7B tested on colab.
+- Auto EXL2 upload
+  - This script is designed to automate the process of quantizing models to EXL2 and uploading them to the HF Hub as seperate branches. This is both available to run on Windows and Linux.
 
 - EXL2 Local Quant Windows
-  - Easily creates environment to quantize models to exl2 using Windows to your local machine.
+  - Easily creates environment to quantize models to exl2 using Windows to your local machine. Replacing soon.
 
 - Upload folder to repo
-  - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files.
+  - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files. This is more to be modified to your needs then used by itself.
+
+- EXL2 Single Quant
+  - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Only 7B tested on colab.
   
 - Download models
-  - Make sure you have [huggingface_hub](https://pypi.org/project/huggingface-hub/) installed as it has the same dependencies. You can install it with '`pip install huggingface-hub`'. To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
+  - To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
 
 ## extras
 

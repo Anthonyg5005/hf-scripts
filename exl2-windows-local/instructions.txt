@@ -13,3 +13,9 @@ after everything is done just download a model using download-model.bat
 to quant, use convert-model-auto.bat. Enter the model's folder name, then the BPW for the model
 
 You can always pause the quantization process by pressing Ctrl + C and typing exit. All progress will be stored in the WD (working directory) folder. You can resume where you left off by running the convert-model-auto.bat script with the same arguments you used before.
+
+Credit to turboderp for creating exllamav2 and the exl2 quantization method.
+https://github.com/turboderp
+
+Credit to oobabooga the original download script.
+https://github.com/oobabooga
