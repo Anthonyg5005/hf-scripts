@@ -4,7 +4,7 @@
 
 # check if "venv" subdirectory exists, if not, create one
 if [ ! -d "venv" ]; then
-    python -m venv venv
+    python3 -m venv venv
 else
     echo "venv directory already exists. If something is broken, delete everything but exl2-quant.py and run this script again."
     read -p "Press enter to continue"

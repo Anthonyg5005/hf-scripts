@@ -147,6 +147,7 @@ if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
         file.write("### BPW:\n\n")
         for bpw in bpwvalue:
             file.write(f"[{bpw}](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/tree/{bpw}bpw)\n\n")
+        file.write(f"\n\\\n[measurement.json](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/raw/main/measurement.json)\n\n")
     print("Created README.md")
 
     upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add temp README") #upload md file

@@ -6,6 +6,7 @@ https://developer.nvidia.com/cuda-downloads
 Nvidia Kepler or higher
 https://developer.nvidia.com/cuda-11-8-0-download-archive
 
+Restart your computer after installing the CUDA toolkit to make sure the PATH is set correctly.
 
 Haven't done much testing but for Windows, Visual Studio with desktop development for C++ might be required. I've gotten cl.exe errors on a previous install
 
