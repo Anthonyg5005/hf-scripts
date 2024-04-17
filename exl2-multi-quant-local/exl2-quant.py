@@ -129,7 +129,7 @@ for bpw in bpwvalue:
     if cmdir == True:
         os.makedirs(f"measurements{slsh}{model}-measure", exist_ok=True) #create measurement directory
         subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json measurements{slsh}{model}-measure", shell=True) #copy measurement to measure directory
-        open(f"{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
+        open(f"measurements{slsh}{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
 
 if tfound == 'false':
