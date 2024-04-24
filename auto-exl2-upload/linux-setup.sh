@@ -27,13 +27,13 @@ read -p "Please enter your GPU compute version, CUDA 11/12 or AMD ROCm (11, 12, 
 
 if [ "$pytorch_version" = "11" ]; then
     echo "Installing PyTorch for CUDA 11.8"
-    venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/cu118
+    venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/cu118 --upgrade
 elif [ "$pytorch_version" = "12" ]; then
     echo "Installing PyTorch for CUDA 12.1"
     venv/bin/python -m pip install torch
 elif [ "$pytorch_version" = "rocm" ]; then
     echo "Installing PyTorch for AMD ROCm 5.7"
-    venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/rocm5.7
+    venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/rocm5.7 --upgrade
 else
     echo "Invalid compute version. Please enter 11, 12, or rocm."
     read -p "Press enter to continue"

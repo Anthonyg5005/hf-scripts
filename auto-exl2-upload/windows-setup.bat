@@ -30,10 +30,10 @@ set /p cuda_version="Please enter your CUDA version (11 or 12): "
 
 if "%cuda_version%"=="11" (
     echo Installing PyTorch for CUDA 11.8...
-    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu118
+    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu118 --upgrade
 ) else if "%cuda_version%"=="12" (
     echo Installing PyTorch for CUDA 12.1...
-    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu121
+    venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu121 --upgrade
 ) else (
     echo Invalid CUDA version. Please enter 11 or 12.
     pause
