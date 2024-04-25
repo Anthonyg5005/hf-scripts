@@ -12,6 +12,9 @@ Haven't done much testing but for Windows, Visual Studio 2019 with desktop devel
 https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&rel=16&utm_medium=microsoft&utm_campaign=download+from+relnotes&utm_content=vs2019ga+button
 install the desktop development for C++ workload
 
+For Linux, install the build tools from your package manager.
+For example, on Ubuntu use: sudo apt-get install build-essential
+
 This may work with AMD cards but only on linux and possibly WSL2. I can't guarantee that it will work on AMD cards, I personally don't have one to test with. You may need to install stuff before starting. https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html
 
 

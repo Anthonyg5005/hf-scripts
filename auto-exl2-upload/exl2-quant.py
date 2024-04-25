@@ -18,7 +18,7 @@ if oname == 'nt':
 elif oname == 'posix':
     osclear = 'clear'
     osmv = 'mv'
-    osrmd = 'rm -r'
+    osrmd = 'rm -rf'
     oscp = 'cp'
     pyt = './venv/bin/python'
     slsh = '/'
