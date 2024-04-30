@@ -37,9 +37,6 @@ Feel free to send in PRs or use this code however you'd like.\
 
 ## usage
 
-- Manage branches
-  - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). Colab and Kaggle secret keys are supported.
-
 - Auto EXL2 HF upload
   - This script is designed to automate the process of quantizing models to EXL2 and uploading them to the HF Hub as seperate branches. This is both available to run on Windows and Linux. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token.
 
@@ -48,6 +45,9 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - Upload folder to repo
   - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files. This is more to be modified to your needs then used by itself.
+
+- Manage branches
+  - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). Colab and Kaggle secret keys are supported.
 
 - EXL2 Single Quant
   - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Only 7B tested on colab.
