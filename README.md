@@ -14,20 +14,19 @@ Feel free to send in PRs or use this code however you'd like.\
 
 ## existing files
 
-- [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
-
 - [Auto EXL2 HF upload](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/auto-exl2-upload/auto-exl2-upload.zip?download=true)
 
 - [EXL2 Local Quants](https://huggingface.co/Anthonyg5005/hf-scripts/resolve/main/exl2-multi-quant-local/exl2-multi-quant-local.zip?download=true)
 
 - [Upload folder to HF](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/upload%20folder%20to%20repo.py)
 
+- [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
+
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
 ## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
 
-- EXL2 Multi Quant local
-  - Will replace Local Quant Windows on this readme, and have Linux support. Modified version of Auto EXL2 upload without the upload and deleting part.
+- Seems I've got nothing to work on right now
 
 ## other recommended stuff
 
