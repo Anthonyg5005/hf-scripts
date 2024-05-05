@@ -12,6 +12,8 @@ Haven't done much testing but for Windows, Visual Studio 2019 with desktop devel
 https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&rel=16&utm_medium=microsoft&utm_campaign=download+from+relnotes&utm_content=vs2019ga+button
 install the desktop development for C++ workload
 
+make sure to have git and wget installed on your system.
+
 For Linux, install the build tools from your package manager.
 For example, on Ubuntu use: sudo apt-get install build-essential
 
@@ -28,7 +30,7 @@ Make sure to also have a lot of RAM depending on the model.
 
 If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the BPW of completed quants as it will start from the beginning. You may also use ctrl + c pause at any time during the quant process.
 
-To add more options to the quantization process, you can add them to line 126. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
+To add more options to the quantization process, you can add them to line 125. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
 
 Things may break in the future as it downloads the latest version of all the dependencies which may either change names or how they work. If something breaks, please open a discussion at https://huggingface.co/Anthonyg5005/hf-scripts/discussions
 

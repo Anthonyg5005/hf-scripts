@@ -58,6 +58,12 @@ echo "venv/bin/python exl2-quant.py" >> start-quant.sh
 echo "read -p \"Press enter to continue\"" >> start-quant.sh
 echo "exit" >> start-quant.sh
 chmod +x start-quant.sh
+
+# create enter-venv.sh
+echo "#!/bin/bash" > enter-venv.sh
+echo "bash --init-file venv/bin/activate" >> enter-venv.sh
+chmod +x enter-venv.sh
+
 echo "If you use ctrl+c to stop, you may need to also use 'pkill python' to stop running scripts."
 echo "Environment setup complete. run start-quant.sh to start the quantization process."
 read -p "Press enter to exit"

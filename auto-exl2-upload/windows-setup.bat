@@ -25,7 +25,8 @@ if "%gitwget%"=="y" (
 )
 
 REM if CUDA version 12 install pytorch for 12.1, else if CUDA 11 install pytorch for 11.8
-echo CUDA path: %CUDA_HOME%
+echo CUDA compilers:
+where nvcc
 set /p cuda_version="Please enter your CUDA version (11 or 12): "
 
 if "%cuda_version%"=="11" (
@@ -58,6 +59,11 @@ echo venv\scripts\python.exe exl2-quant.py >> start-quant.bat
 echo REM tada sound for fun >> start-quant.bat
 echo powershell -c (New-Object Media.SoundPlayer "C:\Windows\Media\tada.wav").PlaySync(); >> start-quant.bat
 echo pause >> start-quant.bat
+
+REM create enter-venv.bat
+echo @echo off > enter-venv.bat
+echo cmd /k call venv\scripts\activate.bat >> enter-venv.bat
+
 powershell -c (New-Object Media.SoundPlayer "C:\Windows\Media\tada.wav").PlaySync();
 echo Environment setup complete. run start-quant.bat to start the quantization process.
 pause
