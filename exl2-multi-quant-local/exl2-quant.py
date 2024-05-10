@@ -71,6 +71,14 @@ qmount = int(input("Enter the number of quants you want to create: "))
 qmount += 1
 clear_screen()
 
+delmodel = input("Do you want to delete the original model after finishing? (Won't delete if canceled or failed) (y/n): ")
+while delmodel != 'y' and delmodel != 'n':
+    delmodel = input("Please enter 'y' or 'n': ")
+if delmodel == 'y':
+    print(f"Deleting dir models/{model} after quants are finished.")
+    time.sleep(3)
+clear_screen()
+
 #save bpw values
 print(f"Type the BPW for the following {qmount - 1} quants. Recommend staying over 2.4 BPW. Use the vram calculator to find the best BPW values: https://huggingface.co/spaces/NyxKrage/LLM-Model-VRAM-Calculator")
 qnum = {}
@@ -131,6 +139,12 @@ for bpw in bpwvalue:
         subprocess.run(f"{oscp} {model}-exl2-{bpw}bpw-WD{slsh}measurement.json measurements{slsh}{model}-measure", shell=True) #copy measurement to measure directory
         open(f"measurements{slsh}{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
+    
+if delmodel == 'y':
+    subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
+    print(f"Deleted models/{model}")
+    time.sleep(2)
+clear_screen()
 
 if tfound == 'false':
     print(f'''

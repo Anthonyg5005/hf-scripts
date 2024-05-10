@@ -1,10 +1,11 @@
 #usually it's what is on the inside that counts, not this time. This script is a mess, but at least it works.
 #import required modules
-from huggingface_hub import login, get_token, whoami, repo_exists, file_exists, upload_folder, create_repo, upload_file, create_branch
+from huggingface_hub import login, get_token, whoami, repo_exists, file_exists, upload_folder, create_repo, upload_file, create_branch, update_repo_visibility
 import os
 import sys
 import subprocess
 import glob
+import time
 
 #define os differences
 oname = os.name
@@ -142,12 +143,12 @@ if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
     print("Writing model card...")
     with open('./README.md', 'w') as file:
         file.write(f"# Exl2 quants for [{modelname}](https://huggingface.co/{repo_url})\n\n")
-        file.write("## Automatically quantized using the auto quant from [hf-scripts](https://huggingface.co/anthonyg5005/hf-scripts)\n\n")
+        file.write("## Automatically quantized using the auto quant script from [hf-scripts](https://huggingface.co/anthonyg5005/hf-scripts)\n\n")
         file.write(f"Would recommend {whoami().get('name', None)} to change up this README to include more info.\n\n")
         file.write("### BPW:\n\n")
         for bpw in bpwvalue:
-            file.write(f"[{bpw}](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/tree/{bpw}bpw)\n\n")
-        file.write(f"\n\\\n[measurement.json](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/raw/main/measurement.json)\n\n")
+            file.write(f"[{bpw}](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/tree/{bpw}bpw)\\\n")
+        file.write(f"[measurement.json](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/resolve/main/measurement.json?download=true)\n")
     print("Created README.md")
 
     upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add temp README") #upload md file
@@ -186,9 +187,25 @@ for bpw in bpwvalue:
 
 if file_exists(f"{whoami().get('name', None)}/{modelname}-exl2", "measurement.json") == False: #check if measurement.json exists in main
     upload_file(path_or_fileobj=f"measurements{slsh}{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
+clear_screen()
     
-print(f'''Quants available at https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2
-      \nRepo is private, go to https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/settings to make public if you'd like.''')
+delmodel = input("Do you want to delete the original model? (y/n): ")
+while delmodel != 'y' and delmodel != 'n':
+    delmodel = input("Please enter 'y' or 'n': ")
+if delmodel == 'y':
+    subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
+    print(f"Deleted models/{model}")
+    time.sleep(2)
+clear_screen()
+
+priv2pub = input("Do you want to make the repo public? (y/n): ")
+while priv2pub != 'y' and priv2pub != 'n':
+    priv2pub = input("Please enter 'y' or 'n': ")
+if priv2pub == 'y':
+    update_repo_visibility(f"{whoami().get('name', None)}/{modelname}-exl2", private=False)
+    print("Repo is now public.")
+    time.sleep(2)
+clear_screen()
 
 if tfound == 'false':
     print(f'''
@@ -197,3 +214,5 @@ if tfound == 'false':
           To logout, use the hf command line interface 'huggingface-cli logout'
                To view your active account, use 'huggingface-cli whoami'
           ''')
+    
+print(f'''Quants available at https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2''')
