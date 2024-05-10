@@ -41,6 +41,13 @@ if "%cuda_version%"=="11" (
     exit
 )
 
+echo Deleting potential conflicting files
+del convert-to-safetensors.py
+del download-model.py
+rmdir /s /q exllamav2
+del start-quant.sh
+del enter-venv.sh
+
 REM download stuff
 echo Downloading files...
 git clone https://github.com/turboderp/exllamav2

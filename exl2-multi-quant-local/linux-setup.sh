@@ -40,6 +40,13 @@ else
     exit
 fi
 
+echo "Deleting potential conflicting files"
+rm convert-to-safetensors.py
+rm download-model.py
+rm -rf exllamav2
+rm start-quant.sh
+rm enter-venv.sh
+
 # download stuff
 echo "Downloading files"
 git clone https://github.com/turboderp/exllamav2

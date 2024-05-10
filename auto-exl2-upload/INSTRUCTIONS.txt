@@ -19,18 +19,20 @@ For example, on Ubuntu use: sudo apt-get install build-essential
 
 This may work with AMD cards but only on linux and possibly WSL2. I can't guarantee that it will work on AMD cards, I personally don't have one to test with. You may need to install stuff before starting. https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html
 
+Only python 3.10 and 3.11
 
 
-First setup your environment by using either windows.bat or linux.sh. If something fails during setup, then every file and folder except for windows.bat, linux.sh, and exl2-quant.py should be deleted then try again.
+
+First setup your environment by using either windows.bat or linux.sh. If something fails during setup, then delete venv folder and try again.
 
 After setup is complete then you'll have a file called start-quant. Use this to run the quant script.
 
 Make sure that your storage space is 3x the amount of the model's size. To mesure this, take the number of billion parameters and mutliply by two, afterwards mutliply by 3 and that's the recommended storage. There's a chance you may get away with 2.5x the size as well.
-Make sure to also have a lot of RAM depending on the model.
+Make sure to also have a lot of RAM depending on the model. Have noticed gemma to use a lot.
 
-If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the BPW of completed quants as it will start from the beginning. You may also use ctrl + c pause at any time during the quant process.
+If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the BPW of completed quants as it will start from the beginning. You may also use ctrl + c to pause at any time during the quant process.
 
-To add more options to the quantization process, you can add them to line 171. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
+To add more options to the quantization process, you can add them to line 174. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
 
 Things may break in the future as it downloads the latest version of all the dependencies which may either change names or how they work. If something breaks, please open a discussion at https://huggingface.co/Anthonyg5005/hf-scripts/discussions
 
@@ -44,4 +46,4 @@ https://github.com/oobabooga
 Credit to Lucain Pouget for maintaining huggingface-hub.
 https://github.com/Wauplin
 
-Only tested with CUDA 12.1 on Windows 11 and half-tested Linux through WSL2 but I don't have enough RAM to fully test but quantization did start.
+Only tested with CUDA 12.1 on Windows 11

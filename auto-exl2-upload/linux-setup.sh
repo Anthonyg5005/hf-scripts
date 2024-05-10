@@ -6,7 +6,7 @@
 if [ ! -d "venv" ]; then
     python3 -m venv venv
 else
-    echo "venv directory already exists. If something is broken, delete everything but exl2-quant.py and run this script again."
+    echo "venv directory already exists. If something is broken, delete venv folder and run this script again."
     read -p "Press enter to continue"
     exit
 fi
@@ -39,6 +39,13 @@ else
     read -p "Press enter to continue"
     exit
 fi
+
+echo "Deleting potential conflicting files"
+rm convert-to-safetensors.py
+rm download-model.py
+rm -rf exllamav2
+rm start-quant.sh
+rm enter-venv.sh
 
 # download stuff
 echo "Downloading files"

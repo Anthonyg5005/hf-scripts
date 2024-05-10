@@ -108,6 +108,7 @@ bpwvalue = list(qnum.values())
 #sort the list from smallest to largest
 bpwvalue.sort()
 
+#downloading the model
 if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model was converted to safetensors, skip download if it was
     result = subprocess.run(f"{pyt} download-model.py {repo_url}", shell=True) #download model from hf (Credit to oobabooga for this script)
     if result.returncode != 0:
@@ -115,6 +116,7 @@ if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model
         sys.exit("Exiting...")
     clear_screen()
 
+#convert to safetensors if bin
 if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model exists
     convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ")
     while convertst != 'y' and convertst != 'n':
@@ -125,8 +127,8 @@ if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model e
         if result.returncode != 0:
             print("Converting failed. Please look for a safetensors model or convert model manually.")
             sys.exit("Exiting...")
-        subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
-        subprocess.run(f"{osmv} models{slsh}{model}-st models{slsh}{model}", shell=True)
+        subprocess.run(f"{osrmd} models{slsh}{model}", shell=True) #remove previous weights
+        subprocess.run(f"{osmv} models{slsh}{model}-st models{slsh}{model}", shell=True) #replace with safetensors
         open(f"models{slsh}{model}{slsh}converted-st", 'w').close()
         print("Finished converting")
     else:
@@ -189,6 +191,7 @@ if file_exists(f"{whoami().get('name', None)}/{modelname}-exl2", "measurement.js
     upload_file(path_or_fileobj=f"measurements{slsh}{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
 clear_screen()
     
+#ask to delete original fp16 weights
 delmodel = input("Do you want to delete the original model? (y/n): ")
 while delmodel != 'y' and delmodel != 'n':
     delmodel = input("Please enter 'y' or 'n': ")
@@ -198,6 +201,7 @@ if delmodel == 'y':
     time.sleep(2)
 clear_screen()
 
+#ask to change repo visibility to public on hf hub
 priv2pub = input("Do you want to make the repo public? (y/n): ")
 while priv2pub != 'y' and priv2pub != 'n':
     priv2pub = input("Please enter 'y' or 'n': ")
@@ -207,6 +211,7 @@ if priv2pub == 'y':
     time.sleep(2)
 clear_screen()
 
+#if new sign in, tell user
 if tfound == 'false':
     print(f'''
               You are now logged in as {whoami().get('fullname', None)}.

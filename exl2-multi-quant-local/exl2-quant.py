@@ -51,7 +51,7 @@ else:
         login(input("API token not detected. Enter your HuggingFace token (empty to skip): "))
     except:
         print("Skipping login... (Unable to access private or gated models)")
-        tfound = "false but skipped" #doesn't matter what this is, only false is used
+        tfound = "false but skipped" #doesn't matter what this is, only 'false' is used
         time.sleep(3)
 clear_screen()
 
@@ -71,6 +71,7 @@ qmount = int(input("Enter the number of quants you want to create: "))
 qmount += 1
 clear_screen()
 
+#ask to delete fp16 after done
 delmodel = input("Do you want to delete the original model after finishing? (Won't delete if canceled or failed) (y/n): ")
 while delmodel != 'y' and delmodel != 'n':
     delmodel = input("Please enter 'y' or 'n': ")
@@ -92,6 +93,7 @@ bpwvalue = list(qnum.values())
 #sort the list from smallest to largest
 bpwvalue.sort()
 
+#downloading the model
 if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model was converted to safetensors, skip download if it was
     result = subprocess.run(f"{pyt} download-model.py {repo_url}", shell=True) #download model from hf (Credit to oobabooga for this script)
     if result.returncode != 0:
@@ -99,6 +101,7 @@ if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model
         sys.exit("Exiting...")
     clear_screen()
 
+#convert to safetensors if bin
 if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model exists
     convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ")
     while convertst != 'y' and convertst != 'n':
@@ -109,8 +112,8 @@ if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model e
         if result.returncode != 0:
             print("Converting failed. Please look for a safetensors model or convert model manually.")
             sys.exit("Exiting...")
-        subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
-        subprocess.run(f"{osmv} models{slsh}{model}-st models{slsh}{model}", shell=True)
+        subprocess.run(f"{osrmd} models{slsh}{model}", shell=True) #remove previous weights
+        subprocess.run(f"{osmv} models{slsh}{model}-st models{slsh}{model}", shell=True) #replace with safetensors
         open(f"models{slsh}{model}{slsh}converted-st", 'w').close()
         print("Finished converting")
     else:
@@ -140,12 +143,14 @@ for bpw in bpwvalue:
         open(f"measurements{slsh}{model}-measure/Delete folder when no more quants are needed from this model", 'w').close()
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
     
+# if chose to delete model at the beginning, delete the model
 if delmodel == 'y':
     subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
     print(f"Deleted models/{model}")
     time.sleep(2)
 clear_screen()
 
+#if new sign in, tell user
 if tfound == 'false':
     print(f'''
               You are now logged in as {whoami().get('fullname', None)}.
