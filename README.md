@@ -7,7 +7,7 @@ language:
 
 Personal scripts to automate some tasks.\
 Will try to keep external module use to a minimum, other than **huggingface_hub**.\
-Feel free to send in PRs or use this code however you'd like.\
+Feel free to send in PRs or use this code however you'd like. External downloaded code after running are AGPL 3.0 but anything I write is unlicense.\
 *[GitHub mirror](https://github.com/anthonyg5005/hf-scripts)*
 
 **For GitHub**: Would recommend creating pull requests and discussions on the [offical huggingface repo](https://huggingface.co/Anthonyg5005/hf-scripts)
