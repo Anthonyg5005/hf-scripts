@@ -39,6 +39,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - Auto EXL2 HF upload
   - This script is designed to automate the process of quantizing models to EXL2 and uploading them to the HF Hub as seperate branches. This is both available to run on Windows and Linux. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token.
+  - [Example repo](https://huggingface.co/Anthonyg5005/Qwen1.5-0.5B-Chat-exl2)
 
 - EXL2 Local Quants
   - Easily creates environment to quantize models to exl2 to your local machine. Supports both Windows and Linux.
