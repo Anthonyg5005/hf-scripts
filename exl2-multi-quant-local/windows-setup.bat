@@ -24,6 +24,14 @@ if "%gitwget%"=="y" (
     exit
 )
 
+REM ask for exllamav2 version
+set /p exllamav2_version="Would you like to build stable or dev version of exllamav2? (stable, dev): "
+if not "%exllamav2_version%"=="stable" if not "%exllamav2_version%"=="dev" (
+    echo Invalid exllamav2 version. Please enter stable or dev.
+    pause
+    exit
+)
+
 REM if CUDA version 12 install pytorch for 12.1, else if CUDA 11 install pytorch for 11.8
 echo CUDA compilers:
 where nvcc
@@ -50,7 +58,11 @@ del enter-venv.sh
 
 REM download stuff
 echo Downloading files...
-git clone https://github.com/turboderp/exllamav2
+if "%exllamav2_version%"=="stable" (
+    git clone https://github.com/turboderp/exllamav2
+) else if "%exllamav2_version%"=="dev" (
+    git clone https://github.com/turboderp/exllamav2 -b dev
+)
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/convert-to-safetensors.py
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/download-model.py
 

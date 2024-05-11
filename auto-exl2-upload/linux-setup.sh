@@ -22,6 +22,14 @@ else
     exit
 fi
 
+# ask for exllamav2 version
+read -p "Want to build stable or dev version of exllamav2? (stable, dev): " exllamav2_version
+if [ "$exllamav2_version" != "stable" ] && [ "$exllamav2_version" != "dev" ]; then
+    echo "Invalid version of exllama. Please enter stable or dev."
+    read -p "Press enter to continue"
+    exit
+fi
+
 # if CUDA version 12 install pytorch for 12.1, else if CUDA 11 install pytorch for 11.8. If ROCm, install pytorch for ROCm 5.7
 read -p "Please enter your GPU compute version, CUDA 11/12 or AMD ROCm (11, 12, rocm): " pytorch_version
 
@@ -49,7 +57,11 @@ rm enter-venv.sh
 
 # download stuff
 echo "Downloading files"
-git clone https://github.com/turboderp/exllamav2
+if [ "$exllamav2_version" = "stable" ]; then
+    git clone https://github.com/turboderp/exllamav2
+elif [ "$exllamav2_version" = "dev" ]; then
+    git clone https://github.com/turboderp/exllamav2 -b dev
+fi
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/convert-to-safetensors.py
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/download-model.py
 
