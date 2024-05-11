@@ -19,7 +19,7 @@ For example, on Ubuntu use: sudo apt-get install build-essential
 
 This may work with AMD cards but only on linux and possibly WSL2. I can't guarantee that it will work on AMD cards, I personally don't have one to test with. You may need to install stuff before starting. https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html
 
-Only python 3.10 and 3.11
+Only python 3.8 - 3.11 is known to work. If you have a higher version of python, I can't guarantee that it will work.
 
 
 
