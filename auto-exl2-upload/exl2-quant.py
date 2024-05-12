@@ -5,7 +5,6 @@ import os
 import sys
 import subprocess
 import glob
-import time
 
 #define os differences
 oname = os.name
@@ -108,6 +107,18 @@ bpwvalue = list(qnum.values())
 #sort the list from smallest to largest
 bpwvalue.sort()
 
+#ask to change repo visibility to public on hf hub
+priv2pub = input("Do you want to make the repo public after successful quants? (y/n): ")
+while priv2pub != 'y' and priv2pub != 'n':
+    priv2pub = input("Please enter 'y' or 'n': ")
+clear_screen()
+
+#ask to delete original fp16 weights
+delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/n): ")
+while delmodel != 'y' and delmodel != 'n':
+    delmodel = input("Please enter 'y' or 'n': ")
+clear_screen()
+
 #downloading the model
 if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model was converted to safetensors, skip download if it was
     result = subprocess.run(f"{pyt} download-model.py {repo_url}", shell=True) #download model from hf (Credit to oobabooga for this script)
@@ -189,27 +200,16 @@ for bpw in bpwvalue:
 
 if file_exists(f"{whoami().get('name', None)}/{modelname}-exl2", "measurement.json") == False: #check if measurement.json exists in main
     upload_file(path_or_fileobj=f"measurements{slsh}{model}-measure{slsh}measurement.json", path_in_repo="measurement.json", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add measurement.json") #upload measurement.json to main
-clear_screen()
-    
-#ask to delete original fp16 weights
-delmodel = input("Do you want to delete the original model? (y/n): ")
-while delmodel != 'y' and delmodel != 'n':
-    delmodel = input("Please enter 'y' or 'n': ")
+
+# if chose to delete model at the beginning, delete the model
 if delmodel == 'y':
     subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
     print(f"Deleted models/{model}")
-    time.sleep(2)
-clear_screen()
 
-#ask to change repo visibility to public on hf hub
-priv2pub = input("Do you want to make the repo public? (y/n): ")
-while priv2pub != 'y' and priv2pub != 'n':
-    priv2pub = input("Please enter 'y' or 'n': ")
+#update repo visibility if user chose to
 if priv2pub == 'y':
     update_repo_visibility(f"{whoami().get('name', None)}/{modelname}-exl2", private=False)
     print("Repo is now public.")
-    time.sleep(2)
-clear_screen()
 
 #if new sign in, tell user
 if tfound == 'false':

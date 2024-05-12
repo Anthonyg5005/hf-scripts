@@ -71,15 +71,6 @@ qmount = int(input("Enter the number of quants you want to create: "))
 qmount += 1
 clear_screen()
 
-#ask to delete fp16 after done
-delmodel = input("Do you want to delete the original model after finishing? (Won't delete if canceled or failed) (y/n): ")
-while delmodel != 'y' and delmodel != 'n':
-    delmodel = input("Please enter 'y' or 'n': ")
-if delmodel == 'y':
-    print(f"Deleting dir models/{model} after quants are finished.")
-    time.sleep(3)
-clear_screen()
-
 #save bpw values
 print(f"Type the BPW for the following {qmount - 1} quants. Recommend staying over 2.4 BPW. Use the vram calculator to find the best BPW values: https://huggingface.co/spaces/NyxKrage/LLM-Model-VRAM-Calculator")
 qnum = {}
@@ -92,6 +83,15 @@ bpwvalue = list(qnum.values())
 
 #sort the list from smallest to largest
 bpwvalue.sort()
+
+#ask to delete fp16 after done
+delmodel = input("Do you want to delete the original model after finishing? (Won't delete if paused or failed) (y/n): ")
+while delmodel != 'y' and delmodel != 'n':
+    delmodel = input("Please enter 'y' or 'n': ")
+if delmodel == 'y':
+    print(f"Deleting dir models/{model} after quants are finished.")
+    time.sleep(3)
+clear_screen()
 
 #downloading the model
 if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model was converted to safetensors, skip download if it was
@@ -147,8 +147,6 @@ for bpw in bpwvalue:
 if delmodel == 'y':
     subprocess.run(f"{osrmd} models{slsh}{model}", shell=True)
     print(f"Deleted models/{model}")
-    time.sleep(2)
-clear_screen()
 
 #if new sign in, tell user
 if tfound == 'false':
