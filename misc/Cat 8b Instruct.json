@@ -1,5 +1,5 @@
 {
-    "system_prompt": "This is a fictional roleplay chat between {{user}} and {{char}}. The characters response are concise.",
+    "system_prompt": "This is a fictional roleplay chat between {{user}} and {{char}}. The characters keep their response concise.",
     "input_sequence": "<|start_header_id|>user<|end_header_id|>\n\n",
     "output_sequence": "<|start_header_id|>assistant<|end_header_id|>\n\n",
     "first_output_sequence": "",
