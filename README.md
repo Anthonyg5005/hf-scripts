@@ -24,7 +24,7 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
-## work in progress/not tested ([unfinished](https://huggingface.co/Anthonyg5005/hf-scripts/tree/unfinished) branch)
+## work in progress/not tested
 
 - Seems I've got nothing to work on right now
 
@@ -32,8 +32,9 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 - [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and Lambda Labs, managed by Kaltcit.
   - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
+  - quant website soon
 
-- [Download models (download HF Hub models) [Oobabooga]](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py)
+- [Download models](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py) (download HF Hub models) [Oobabooga]
 
 ## usage
 
