@@ -23,10 +23,10 @@ jobs:
           github-server-url: 'https://github.com'
       - name: Clone from Hugging Face
         env:
-          HF_TOKEN: ${{ secrets.HF_ACCESS_TOKEN }}
           github_token: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
-          git clone https://Anthonyg5005:$HF_TOKEN@huggingface.co/Anthonyg5005/hf-scripts mirror
+          export GIT_CLONE_PROTECTION_ACTIVE=false
+          git clone https://huggingface.co/Anthonyg5005/hf-scripts mirror
           cd mirror
           
           # Now, push to the original GitHub repository with username and token
