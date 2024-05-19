@@ -18,8 +18,7 @@ if "%gitwget%"=="y" (
     echo "Setting up environment"
 ) else (
     echo Please install git and wget before running this script.
-    echo winget install wget
-    echo winget install git
+    echo winget install wget git.git
     pause
     exit
 )
