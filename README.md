@@ -30,7 +30,7 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 ## other recommended stuff
 
-- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and Lambda Labs, managed by Kaltcit and spacecruiser.
+- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and Lambda Labs, managed by Kaltcit and spacecruiser. (Currently Down)
   - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
   - quant website soon
 
