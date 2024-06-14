@@ -4,11 +4,15 @@
 
 # check if "venv" subdirectory exists, if not, create one
 if [ ! -d "venv" ]; then
-    python3 -m venv venv
+    python -m venv venv
 else
-    echo "venv directory already exists. If something is broken, delete venv folder and run this script again."
-    read -p "Press enter to continue"
-    exit
+    read -p "venv directory already exists. Looking to upgrade/reinstall exllama? (will reinstall python venv) (y/n) " reinst
+    if [ "$reinst" = "y" ]; then
+        rm -rf venv
+        python -m venv venv
+    else
+        exit
+    fi
 fi
 
 # ask if the user has git installed
@@ -17,7 +21,9 @@ read -p "Do you have git and wget installed? (y/n) " gitwget
 if [ "$gitwget" = "y" ]; then
     echo "Setting up environment"
 else
-    echo "Please install git and wget before running this script."
+    echo "Please install git and wget from your distro's package manager before running this script."
+    echo "Example for Debian-based: sudo apt-get install git wget"
+    echo "Example for Arch-based: sudo pacman -S git wget"
     read -p "Press enter to continue"
     exit
 fi
@@ -32,6 +38,15 @@ fi
 
 # if CUDA version 12 install pytorch for 12.1, else if CUDA 11 install pytorch for 11.8. If ROCm, install pytorch for ROCm 5.7
 read -p "Please enter your GPU compute version, CUDA 11/12 or AMD ROCm (11, 12, rocm): " pytorch_version
+
+# ask to install flash attention
+echo "Flash attention is a feature that could fix overflow issues on some more broken models."
+read -p "Would you like to install flash-attention? (rarely needed and optional) (y/n) " flash_attention
+if [ "$flash_attention" != "y" ] && [ "$flash_attention" != "n" ]; then
+    echo "Invalid input. Please enter y or n."
+    read -p "Press enter to continue"
+    exit
+fi
 
 if [ "$pytorch_version" = "11" ]; then
     echo "Installing PyTorch for CUDA 11.8"
@@ -54,6 +69,7 @@ rm download-model.py
 rm -rf exllamav2
 rm start-quant.sh
 rm enter-venv.sh
+rm -rf flash-attention
 
 # download stuff
 echo "Downloading files"
@@ -70,6 +86,14 @@ echo "Installing pip packages"
 venv/bin/python -m pip install -r exllamav2/requirements.txt
 venv/bin/python -m pip install huggingface-hub transformers accelerate
 venv/bin/python -m pip install ./exllamav2
+
+if [ "$flash_attention" = "y" ]; then
+    echo "Installing flash-attention..."
+    echo "If failed, retry without flash-attention."
+    git clone https://github.com/Dao-AILab/flash-attention
+    venv/bin/python -m pip install ./flash-attention
+    rm -rf flash-attention
+fi
 
 # create start-quant.sh
 echo "#!/bin/bash" > start-quant.sh

@@ -85,9 +85,13 @@ bpwvalue = list(qnum.values())
 bpwvalue.sort()
 
 #ask to delete fp16 after done
-delmodel = input("Do you want to delete the original model after finishing? (Won't delete if paused or failed) (y/n): ")
+delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ")
+if delmodel == '':
+    delmodel = 'n'
 while delmodel != 'y' and delmodel != 'n':
     delmodel = input("Please enter 'y' or 'n': ")
+    if delmodel == '':
+        delmodel = 'n'
 if delmodel == 'y':
     print(f"Deleting dir models/{model} after quants are finished.")
     time.sleep(3)

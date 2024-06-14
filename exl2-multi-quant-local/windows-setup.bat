@@ -6,8 +6,12 @@ REM check if "venv" subdirectory exists, if not, create one
 if not exist "venv\" (
     python -m venv venv
 ) else (
-    echo venv directory already exists. If something is broken, delete everything but exl2-quant.py and run this script again.
-    pause
+    set /p reinst="venv directory already exists. Looking to upgrade/reinstall exllama? (will reinstall python venv) (y/n) "
+)
+if "%reinst%"=="y" (
+    rmdir /s /q venv
+    python -m venv venv
+) else (
     exit
 )
 
@@ -36,6 +40,15 @@ echo CUDA compilers:
 where nvcc
 set /p cuda_version="Please enter your CUDA version (11 or 12): "
 
+REM ask to install flash attention
+echo Flash attention is a feature that could fix overflow issues on some more broken models. However it will increase install time by a few hours.
+set /p flash_attention="Would you like to install flash-attention? (rarely needed and optional) (y/n) "
+if not "%flash_attention%"=="y" if not "%flash_attention%"=="n" (
+    echo Invalid input. Please enter y or n.
+    pause
+    exit
+)
+
 if "%cuda_version%"=="11" (
     echo Installing PyTorch for CUDA 11.8...
     venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu118 --upgrade
@@ -54,6 +67,7 @@ del download-model.py
 rmdir /s /q exllamav2
 del start-quant.sh
 del enter-venv.sh
+rmdir /s /q flash-attention
 
 REM download stuff
 echo Downloading files...
@@ -70,6 +84,14 @@ echo Installing pip packages...
 venv\scripts\python.exe -m pip install -r exllamav2/requirements.txt
 venv\scripts\python.exe -m pip install huggingface-hub transformers accelerate
 venv\scripts\python.exe -m pip install .\exllamav2
+
+if "%flash_attention%"=="y" (
+    echo Installing flash-attention. Go watch some movies, this will take a while...
+    echo If failed, retry without flash-attention.
+    git clone https://github.com/Dao-AILab/flash-attention
+    venv\scripts\python.exe -m pip install .\flash-attention
+    rmdir /s /q flash-attention
+)
 
 REM create start-quant-windows.bat
 echo @echo off > start-quant.bat

@@ -114,9 +114,13 @@ while priv2pub != 'y' and priv2pub != 'n':
 clear_screen()
 
 #ask to delete original fp16 weights
-delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/n): ")
+delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ")
+if delmodel == '':
+    delmodel = 'n'
 while delmodel != 'y' and delmodel != 'n':
     delmodel = input("Please enter 'y' or 'n': ")
+    if delmodel == '':
+        delmodel = 'n'
 clear_screen()
 
 #downloading the model
