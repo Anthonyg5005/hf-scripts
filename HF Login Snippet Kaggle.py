@@ -16,8 +16,10 @@ if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in
                    Set your secrets with the secrets add-on on the top of the screen.
              ''')
 if get_token() is not None:
-    #if the token is found then log in:
-    login(get_token())
+    try:
+        login(get_token()) #attempt to login with token found
+    except ValueError:
+        login(input("API token is no longer valid. Enter your new HuggingFace (WRITE) token: ")) #if token is invalid then prompt user to provide new token
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))

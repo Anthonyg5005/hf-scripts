@@ -28,6 +28,12 @@ def clear_screen():
     os.system(osclear)
 
 #get token
+if os.environ.get('HF_TOKEN', None) is not None:
+    try:
+        login(get_token())
+    except ValueError:
+        print("You have an invalid token set in your environment variable HF_TOKEN. This will cause issues with this script\nRemove the variable or set it to a valid WRITE token.")
+        sys.exit("Exiting...")
 if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
     from kaggle_secrets import UserSecretsClient # type: ignore
     from kaggle_web_client import BackendError # type: ignore
@@ -40,9 +46,13 @@ if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in
                    Set your secrets with the secrets add-on on the top of the screen.
              ''')
 if get_token() is not None:
-    #if the token is found then log in:
-    login(get_token())
-    tfound = "Where are my doritos?" #doesn't matter what this is, only false is used
+    tfound = 'true'
+    #if the token is found in either HF_TOKEN or cli login then log in:
+    try:
+        login(get_token())
+    except ValueError:
+        login(input("API token is no longer valid. Enter your new HuggingFace (WRITE) token: "))
+    tfound = 'false'
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))
@@ -54,7 +64,7 @@ while True:
         clear_screen()
         if os.environ.get('HF_TOKEN', None) is not None: #if environ finds HF_TOKEN as read-only then display following text and exit:
             print('''
-                  You have the environment variable HF_TOKEN set.
+            You have the environment variable HF_TOKEN set to a 'READ' token.
                                  You cannot log in.
           Either set the environment variable to a 'WRITE' token or remove it.
                   ''')

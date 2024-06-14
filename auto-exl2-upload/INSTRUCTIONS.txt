@@ -23,7 +23,7 @@ Only python 3.8 - 3.12 is known to work. If you have a higher/lower version of p
 
 
 
-First setup your environment by using either windows.bat or linux.sh.
+First setup your environment by using either windows.bat or linux.sh. If you want to upgrade your exllama version, you can run the setup script again.
 
 After setup is complete then you'll have a file called start-quant. Use this to run the quant script.
 
@@ -32,7 +32,7 @@ Make sure to also have a lot of RAM depending on the model. Have noticed gemma t
 
 If you close the terminal or the terminal crashes, check the last BPW it was on and enter the remaining quants you wanted. It should be able to pick up where it left off. Don't type the BPW of completed quants as it will start from the beginning. You may also use ctrl + c to pause at any time during the quant process.
 
-To add more options to the quantization process, you can add them to line 189. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
+To add more options to the quantization process, you can add them to line 199. All options: https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
 
 Things may break in the future as it downloads the latest version of all the dependencies which may either change names or how they work. If something breaks, please open a discussion at https://huggingface.co/Anthonyg5005/hf-scripts/discussions
 

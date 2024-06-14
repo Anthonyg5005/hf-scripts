@@ -3,15 +3,17 @@
 setlocal
 
 REM check if "venv" subdirectory exists, if not, create one
+set reinst=n
 if not exist "venv\" (
     python -m venv venv
+    set newvenv=y
 ) else (
     set /p reinst="venv directory already exists. Looking to upgrade/reinstall exllama? (will reinstall python venv) (y/n) "
 )
 if "%reinst%"=="y" (
     rmdir /s /q venv
     python -m venv venv
-) else (
+) else if not "%newvenv%"=="y" (
     exit
 )
 

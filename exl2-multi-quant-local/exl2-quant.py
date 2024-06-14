@@ -1,6 +1,6 @@
 #usually it's what is on the inside that counts, not this time. This script is a mess, but at least it works.
 #import required modules
-from huggingface_hub import login, get_token, whoami, repo_exists
+from huggingface_hub import login, logout, get_token, whoami, repo_exists
 import os
 import sys
 import subprocess
@@ -29,21 +29,26 @@ def clear_screen():
     os.system(osclear)
 
 #get token
-if os.environ.get('KAGGLE_KERNEL_RUN_TYPE', None) is not None: #check if user in kaggle
-    from kaggle_secrets import UserSecretsClient # type: ignore
-    from kaggle_web_client import BackendError # type: ignore
+if os.environ.get('HF_TOKEN', None) is not None:
     try:
-        login(UserSecretsClient().get_secret("HF_TOKEN")) #login if token secret found
-    except BackendError: 
-        print('''
-            When using Kaggle, make sure to use the secret key HF_TOKEN with a 'WRITE' token.
-                   This will prevent the need to login every time you run the script.
-                   Set your secrets with the secrets add-on on the top of the screen.
-             ''')
+        login(get_token())
+    except ValueError:
+        print("You have an invalid token set in your environment variable HF_TOKEN. This will cause issues with this script\nRemove the variable or set it to a valid token.")
+        sys.exit("Exiting...")
 if get_token() is not None:
-    #if the token is found then log in:
-    login(get_token())
-    tfound = "true" 
+    tfound = 'true'
+    #if the token is found in either HF_TOKEN or cli login then log in:
+    try:
+        login(get_token())
+    except ValueError:
+        try:
+            login(input("API token is no longer valid. Enter your new HuggingFace token (empty to logout): "))
+        except:
+            logout()
+            print("Logging out... (Unable to access private or gated models)")
+            tfound = 'false but logged out'
+            time.sleep(3)
+        tfound = 'false'
 else:
     #if the token is not found then prompt user to provide it:
     tfound = "false"
