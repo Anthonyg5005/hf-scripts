@@ -52,7 +52,7 @@ if get_token() is not None:
         login(get_token())
     except ValueError:
         login(input("API token is no longer valid. Enter your new HuggingFace (WRITE) token: "))
-    tfound = 'false'
+        tfound = 'false'
 else:
     #if the token is not found then prompt user to provide it:
     login(input("API token not detected. Enter your HuggingFace (WRITE) token: "))

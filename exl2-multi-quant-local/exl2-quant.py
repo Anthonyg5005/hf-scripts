@@ -41,6 +41,7 @@ if get_token() is not None:
     try:
         login(get_token())
     except ValueError:
+        tfound = 'false'
         try:
             login(input("API token is no longer valid. Enter your new HuggingFace token (empty to logout): "))
         except:
@@ -48,7 +49,6 @@ if get_token() is not None:
             print("Logging out... (Unable to access private or gated models)")
             tfound = 'false but logged out'
             time.sleep(3)
-        tfound = 'false'
 else:
     #if the token is not found then prompt user to provide it:
     tfound = "false"
