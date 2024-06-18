@@ -21,7 +21,7 @@ REM ask if the user has git installed
 set /p gitwget="Do you have git and wget installed? (y/n) "
 
 if "%gitwget%"=="y" (
-    echo "Setting up environment"
+    echo Setting up environment
 ) else (
     echo Please install git and wget before running this script.
     echo winget install wget git.git
