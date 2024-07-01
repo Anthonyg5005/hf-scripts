@@ -67,8 +67,8 @@ echo Deleting potential conflicting files
 del convert-to-safetensors.py
 del download-model.py
 rmdir /s /q exllamav2
-del start-quant.sh
-del enter-venv.sh
+del start-quant.bat
+del enter-venv.bat
 rmdir /s /q flash-attention
 
 REM download stuff
