@@ -43,7 +43,7 @@ where nvcc
 set /p cuda_version="Please enter your CUDA version (11 or 12): "
 
 REM ask to install flash attention
-echo Flash attention is a feature that could fix overflow issues on some more broken models. However it will increase install time by a few hours.
+echo Flash attention is a feature that could fix overflow issues on some more broken models, however, it will increase install time by a few hours.
 set /p flash_attention="Would you like to install flash-attention? (rarely needed and optional) (y/n) "
 if not "%flash_attention%"=="y" if not "%flash_attention%"=="n" (
     echo Invalid input. Please enter y or n.
@@ -69,7 +69,6 @@ del download-model.py
 rmdir /s /q exllamav2
 del start-quant.bat
 del enter-venv.bat
-rmdir /s /q flash-attention
 
 REM download stuff
 echo Downloading files...
@@ -87,13 +86,7 @@ venv\scripts\python.exe -m pip install -r exllamav2/requirements.txt
 venv\scripts\python.exe -m pip install huggingface-hub transformers accelerate
 venv\scripts\python.exe -m pip install .\exllamav2
 
-if "%flash_attention%"=="y" (
-    echo Installing flash-attention. Go watch some movies, this will take a while...
-    echo If failed, retry without flash-attention.
-    git clone https://github.com/Dao-AILab/flash-attention
-    venv\scripts\python.exe -m pip install .\flash-attention
-    rmdir /s /q flash-attention
-)
+echo Writing batch files...
 
 REM create start-quant-windows.bat
 echo @echo off > start-quant.bat
@@ -105,6 +98,15 @@ echo pause >> start-quant.bat
 REM create enter-venv.bat
 echo @echo off > enter-venv.bat
 echo cmd /k call venv\scripts\activate.bat >> enter-venv.bat
+
+if "%flash_attention%"=="y" (
+    echo Going to attempt to install flash attention but it isn't required.
+    echo You may close now if you'd like and continue without flash attention.
+    pause
+    echo Get some popcorn and watch a movie. This will take a while.
+    echo Installing flash-attn...
+    venv\scripts\python.exe -m pip install git+https://github.com/Dao-AILab/flash-attention.git
+)
 
 powershell -c (New-Object Media.SoundPlayer "C:\Windows\Media\tada.wav").PlaySync();
 echo Environment setup complete. run start-quant.bat to start the quantization process.
