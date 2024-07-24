@@ -1,7 +1,7 @@
 For NVIDIA cards install the CUDA toolkit
 
 Nvidia Maxwell or higher
-https://developer.nvidia.com/cuda-downloads
+https://developer.nvidia.com/cuda-12-1-0-download-archive
 
 Nvidia Kepler or higher
 https://developer.nvidia.com/cuda-11-8-0-download-archive
