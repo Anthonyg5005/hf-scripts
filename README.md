@@ -26,13 +26,13 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 ## work in progress/not tested
 
-- Add custom shard size to the easy quant scipts.
+- Add custom safetensors shard size and local model support to the easy quant scipts.
 
 ## other recommended stuff
 
 - [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and Lambda Labs, managed by Kaltcit and spacecruiser.
   - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
-  - quant website soon
+  - quant website some day
 
 - [Download models](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py) (download HF Hub models) [Oobabooga]
 
