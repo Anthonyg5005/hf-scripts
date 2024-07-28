@@ -26,7 +26,7 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 ## work in progress/not tested
 
-- Seems I've got nothing to work on right now
+- Add custom shard size to the easy quant scipts.
 
 ## other recommended stuff
 
