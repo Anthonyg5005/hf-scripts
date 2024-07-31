@@ -26,6 +26,8 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 ## work in progress/not tested
 
+- Allow using finegrained tokens to login scripts (Priority)
+
 - Add custom safetensors shard size and local model support to the easy quant scipts.
 
 ## other recommended stuff
