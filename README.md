@@ -24,11 +24,12 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 
 - [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
 
-## work in progress/not tested
+## work in progress/not tested (ordered by priority)
 
-- Allow using finegrained tokens to login scripts (Priority)
-
-- Add custom safetensors shard size and local model support to the easy quant scipts.
+- Easy exl2 quants
+  - Allow using finegrained tokens to login scripts
+  - Add custom safetensors shard size.
+  - Local model support.
 
 ## other recommended stuff
 
