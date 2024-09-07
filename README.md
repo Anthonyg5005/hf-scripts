@@ -5,9 +5,8 @@ language:
 ---
 # scripts
 
-Personal scripts to automate some tasks.\
-Will try to keep external module use to a minimum, other than **huggingface_hub**.\
-Feel free to send in PRs or use this code however you'd like. External downloaded code after running are AGPL 3.0 but anything I write is unlicense.\
+Personal scripts to automate some tasks mostly using [huggingface_hub](https://github.com/huggingface/huggingface_hub).\
+Feel free to send in PRs or use this code however you'd like.\
 *[GitHub mirror](https://github.com/anthonyg5005/hf-scripts)*
 
 **For GitHub**: Would recommend creating pull requests and discussions on the [offical huggingface repo](https://huggingface.co/Anthonyg5005/hf-scripts)
@@ -27,15 +26,13 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 ## work in progress/not tested (ordered by priority)
 
 - Easy exl2 quants
-  - Allow using finegrained tokens to login scripts
   - Add custom safetensors shard size.
   - Local model support.
+  - Allow using finegrained tokens to login scripts
 
 ## other recommended stuff
 
-- [Exllama Discord server](https://discord.gg/NSFwVuCjRq) Free Exl2 quantizing bot sponsored by The Bloke and Lambda Labs, managed by Kaltcit and spacecruiser.
-  - existing quants under the HF account [@blockblockblock](https://huggingface.co/blockblockblock)
-  - quant website some day
+- [Exllama Discord server](https://discord.gg/NSFwVuCjRq)
 
 - [Download models](https://github.com/oobabooga/text-generation-webui/blob/main/download-model.py) (download HF Hub models) [Oobabooga]
 
@@ -49,7 +46,7 @@ Feel free to send in PRs or use this code however you'd like. External downloade
   - Easily creates environment to quantize models to exl2 to your local machine. Supports both Windows and Linux.
 
 - Upload folder to repo
-  - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files. This is more to be modified to your needs then used by itself.
+  - Uploads user specified folder to specified repo, can create private repos too. Not the same as git commit and push, instead uploads any additional files. This is more of a practice for me than for actual usage.
 
 - Manage branches
   - Run script and follow prompts. You will be required to be logged in to HF Hub. If you are not logged in, you will need a WRITE token. You can get one in your [HuggingFace settings](https://huggingface.co/settings/tokens). Colab and Kaggle secret keys are supported.
@@ -57,7 +54,7 @@ Feel free to send in PRs or use this code however you'd like. External downloade
 - EXL2 Single Quant
   - Allows you to quantize to exl2 using colab. This version creates a exl2 quant to upload to private repo. Only 7B tested on colab.
   
-- Download models
+- Download models (oobabooga)
   - To use the script, open a terminal and run '`python download-model.py USER/MODEL:BRANCH`'. There's also a '`--help`' flag to show the available arguments. To download from private repositories, make sure to login using '`huggingface-cli login`' or (not recommended) `HF_TOKEN` environment variable.
 
 ## extras
