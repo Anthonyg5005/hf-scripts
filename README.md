@@ -27,7 +27,6 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - Easy exl2 quants
   - Add custom safetensors shard size.
-  - Local model support.
   - Allow using finegrained tokens to login scripts
 
 ## other recommended stuff
