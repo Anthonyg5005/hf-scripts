@@ -90,11 +90,11 @@ bpwvalue = list(qnum.values())
 bpwvalue.sort()
 
 #ask to delete fp16 after done
-delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ")
+delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ").lower()
 if delmodel == '':
     delmodel = 'n'
 while delmodel != 'y' and delmodel != 'n':
-    delmodel = input("Please enter 'y' or 'n': ")
+    delmodel = input("Please enter 'y' or 'n': ").lower()
     if delmodel == '':
         delmodel = 'n'
 if delmodel == 'y':
@@ -112,12 +112,19 @@ if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model
 
 #convert to safetensors if bin
 if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model exists
-    convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ")
+    convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ").lower()
     while convertst != 'y' and convertst != 'n':
-        convertst = input("Please enter 'y' or 'n': ")
+        convertst = input("Please enter 'y' or 'n': ").lower()
+    convusebf16 = input("Would you like to use bf16 loading? Will reduce ram usage (y/n): ").lower()
+    while convusebf16 != 'y' and convusebf16 != 'n':
+        convusebf16 = input("Please enter 'y' or 'n': ").lower()
+    if convusebf16 == 'y':
+        usingbf16 = "--bf16"
+    else:
+        usingbf16 = ""
     if convertst == 'y':
         print("Converting weights to safetensors, please wait...")
-        result = subprocess.run(f"{pyt} convert-to-safetensors.py models{slsh}{model} --output models{slsh}{model}-st", shell=True) #convert to safetensors (Credit to oobabooga for this script as well)
+        result = subprocess.run(f"{pyt} convert-to-safetensors.py models{slsh}{model} --output models{slsh}{model}-st {usingbf16}", shell=True) #convert to safetensors (Credit to oobabooga for this script as well)
         if result.returncode != 0:
             print("Converting failed. Please look for a safetensors model or convert model manually.")
             sys.exit("Exiting...")

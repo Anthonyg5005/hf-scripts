@@ -118,17 +118,17 @@ bpwvalue = list(qnum.values())
 bpwvalue.sort()
 
 #ask to change repo visibility to public on hf hub
-priv2pub = input("Do you want to make the repo public after successful quants? (y/n): ")
+priv2pub = input("Do you want to make the repo public after successful quants? (y/n): ").lower()
 while priv2pub != 'y' and priv2pub != 'n':
-    priv2pub = input("Please enter 'y' or 'n': ")
+    priv2pub = input("Please enter 'y' or 'n': ").lower()
 clear_screen()
 
 #ask to delete original fp16 weights
-delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ")
+delmodel = input("Do you want to delete the original model? (Won't delete if paused or failed) (y/N): ").lower()
 if delmodel == '':
     delmodel = 'n'
 while delmodel != 'y' and delmodel != 'n':
-    delmodel = input("Please enter 'y' or 'n': ")
+    delmodel = input("Please enter 'y' or 'n': ").lower()
     if delmodel == '':
         delmodel = 'n'
 clear_screen()
@@ -143,12 +143,19 @@ if not os.path.exists(f"models{slsh}{model}{slsh}converted-st"): #check if model
 
 #convert to safetensors if bin
 if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model exists
-    convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ")
+    convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ").lower()
     while convertst != 'y' and convertst != 'n':
-        convertst = input("Please enter 'y' or 'n': ")
+        convertst = input("Please enter 'y' or 'n': ").lower()
+    convusebf16 = input("Would you like to use bf16 loading? Will reduce ram usage (y/n): ").lower()
+    while convusebf16 != 'y' and convusebf16 != 'n':
+        convusebf16 = input("Please enter 'y' or 'n': ").lower()
+    if convusebf16 == 'y':
+        usingbf16 = "--bf16"
+    else:
+        usingbf16 = ""
     if convertst == 'y':
         print("Converting weights to safetensors, please wait...")
-        result = subprocess.run(f"{pyt} convert-to-safetensors.py models{slsh}{model} --output models{slsh}{model}-st", shell=True) #convert to safetensors (Credit to oobabooga for this script as well)
+        result = subprocess.run(f"{pyt} convert-to-safetensors.py models{slsh}{model} --output models{slsh}{model}-st {usingbf16}", shell=True) #convert to safetensors (Credit to oobabooga for this script as well)
         if result.returncode != 0:
             print("Converting failed. Please look for a safetensors model or convert model manually.")
             sys.exit("Exiting...")
@@ -171,7 +178,6 @@ if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
     with open('./README.md', 'w') as file:
         file.write(f"# Exl2 quants for [{modelname}](https://huggingface.co/{repo_url})\n\n")
         file.write("## Automatically quantized using the auto quant script from [hf-scripts](https://huggingface.co/anthonyg5005/hf-scripts)\n\n")
-        file.write(f"Would recommend {whoami().get('name', None)} to change up this README to include more info.\n\n")
         file.write("### BPW:\n\n")
         for bpw in bpwvalue:
             file.write(f"[{bpw}](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/tree/{bpw}bpw)\\\n")
@@ -208,6 +214,11 @@ for bpw in bpwvalue:
         create_branch(f"{whoami().get('name', None)}/{modelname}-exl2", branch=f"{bpw}bpw") #create branch
     except:
         print(f"Branch {bpw} already exists, trying upload...")
+    try:
+        os.remove(f"{model}-exl2-{bpw}bpw/README.md") #bypasses encode issue when uploading some models
+        print("Deleting model README.")
+    except:
+        print("Skipping README delete.")
     upload_folder(folder_path=f"{model}-exl2-{bpw}bpw", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message=f"Add quant for BPW {bpw}", revision=f"{bpw}bpw") #upload quantized model
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw", shell=True) #remove compile directory

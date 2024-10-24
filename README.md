@@ -21,7 +21,7 @@ Feel free to send in PRs or use this code however you'd like.\
 
 - [Manage branches (create/delete)](https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/manage%20branches.py)
 
-- [EXL2 Single Quant V3](https://colab.research.google.com/drive/1Vc7d6JU3Z35OVHmtuMuhT830THJnzNfS?usp=sharing) **(COLAB)**
+- [EXL2 Single Quant V3](https://colab.research.google.com/#fileId=https://huggingface.co/Anthonyg5005/hf-scripts/blob/main/ipynb/EXL2_Private_Quant_V3.ipynb) **(COLAB)**
 
 ## work in progress/not tested (ordered by priority)
 
