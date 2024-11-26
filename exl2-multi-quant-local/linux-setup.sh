@@ -90,7 +90,7 @@ echo "Writing shell files..."
 
 # create start-quant.sh
 echo "#!/bin/bash" > start-quant.sh
-echo "venv/bin/python exl2-quant.py" >> start-quant.sh
+echo "venv/bin/python exl2-quant-l.py" >> start-quant.sh
 echo "read -p \"Press enter to continue\"" >> start-quant.sh
 echo "exit" >> start-quant.sh
 chmod +x start-quant.sh

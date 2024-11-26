@@ -91,7 +91,7 @@ echo Writing batch files...
 REM create start-quant-windows.bat
 echo @echo off > start-quant.bat
 echo venv\scripts\python.exe exl2-quant.py >> start-quant.bat
-echo REM tada sound for fun >> start-quant.bat
+echo REM tada sound for fun >> start-quant-l.bat
 echo powershell -c (New-Object Media.SoundPlayer "C:\Windows\Media\tada.wav").PlaySync(); >> start-quant.bat
 echo pause >> start-quant.bat
 
