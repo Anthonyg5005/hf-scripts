@@ -146,9 +146,10 @@ if not glob.glob(f"models/{model}/*.safetensors"): #check if safetensors model e
     convertst = input("Couldn't find safetensors model, do you want to convert to safetensors? (y/n): ").lower()
     while convertst != 'y' and convertst != 'n':
         convertst = input("Please enter 'y' or 'n': ").lower()
-    convusebf16 = input("Would you like to use bf16 loading? Will reduce ram usage (y/n): ").lower()
-    while convusebf16 != 'y' and convusebf16 != 'n':
-        convusebf16 = input("Please enter 'y' or 'n': ").lower()
+    if convertst == 'y':
+        convusebf16 = input("Would you like to use bf16 loading? Will reduce ram usage (y/n): ").lower()
+        while convusebf16 != 'y' and convusebf16 != 'n':
+            convusebf16 = input("Please enter 'y' or 'n': ").lower()
     if convusebf16 == 'y':
         usingbf16 = "--bf16"
     else:
