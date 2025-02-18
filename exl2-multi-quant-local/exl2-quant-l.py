@@ -98,7 +98,7 @@ for bpw in bpwvalue:
     os.makedirs(f"{modelname}-exl2-quants{slsh}{modelname}-exl2-{bpw}bpw", exist_ok=True) #create compile full directory
     subprocess.run(f"{oscp} models{slsh}{model}{slsh}config.json {model}-exl2-{bpw}bpw-WD", shell=True) #copy config to working directory
     #more settings exist in the convert.py script, to veiw them go to docs/convert.md or https://github.com/turboderp/exllamav2/blob/master/doc/convert.md
-    result = subprocess.run(f"{pyt} exllamav2/convert.py -i models/{model} -o {model}-exl2-{bpw}bpw-WD -cf {modelname}-exl2-quants{slsh}{modelname}-exl2-{bpw}bpw -b {bpw}{mskip} -hb 8", shell=True) #run quantization and exit if failed (Credit to turbo for his dedication to exl2)
+    result = subprocess.run(f"{pyt} exllamav2/convert.py -i models/{model} -o {model}-exl2-{bpw}bpw-WD -cf {modelname}-exl2-quants{slsh}{modelname}-exl2-{bpw}bpw -b {bpw}{mskip}", shell=True) #run quantization and exit if failed (Credit to turbo for his dedication to exl2)
     if result.returncode != 0:
         print("Quantization failed.")
         sys.exit("Exiting...")
