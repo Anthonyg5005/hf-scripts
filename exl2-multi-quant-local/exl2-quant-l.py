@@ -1,6 +1,5 @@
 #usually it's what is on the inside that counts, not this time. This script is a mess, but at least it works.
 #import required modules
-from huggingface_hub import login, logout, get_token, whoami, repo_exists
 import os
 import sys
 import subprocess
