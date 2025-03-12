@@ -1,7 +1,7 @@
 name: Clone from Hugging Face
 on:
   schedule:
-    - cron: '0 0 * * *' # <-- update daily
+    - cron: '0 0 * * 6'
   workflow_dispatch:
 jobs:
   clone:
