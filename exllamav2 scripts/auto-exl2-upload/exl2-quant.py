@@ -1,6 +1,6 @@
 #usually it's what is on the inside that counts, not this time. This script is a mess, but at least it works.
 #import required modules
-from huggingface_hub import login, get_token, whoami, repo_exists, file_exists, upload_folder, create_repo, upload_file, create_branch, update_repo_visibility
+from huggingface_hub import login, get_token, whoami, repo_exists, file_exists, upload_folder, create_repo, upload_file, create_branch, update_repo_settings
 import os
 import sys
 import subprocess
@@ -240,7 +240,7 @@ if delmodel == 'y':
 
 #update repo visibility if user chose to
 if priv2pub == 'y':
-    update_repo_visibility(f"{whoami().get('name', None)}/{modelname}-exl2", private=False)
+    update_repo_settings(f"{whoami().get('name', None)}/{modelname}-exl2", private=False)
     print("Repo is now public.")
 
 #if new sign in, tell user
