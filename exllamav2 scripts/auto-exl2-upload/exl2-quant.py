@@ -177,6 +177,12 @@ if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
     #create the markdown file
     print("Writing model card...")
     with open('./README.md', 'w') as file:
+        file.write('---\n')
+        file.write('library_name: ExLlama2\n')
+        file.write('pipeline_tag: text-generation\n')
+        file.write(f'base_model: {repo_url}\n')
+        file.write('base_model_relation: quantized\n')
+        file.write('---\n\n')
         file.write(f"# Exl2 quants for [{modelname}](https://huggingface.co/{repo_url})\n\n")
         file.write("## Automatically quantized using the auto quant script from [hf-scripts](https://huggingface.co/anthonyg5005/hf-scripts)\n\n")
         file.write("### BPW:\n\n")
