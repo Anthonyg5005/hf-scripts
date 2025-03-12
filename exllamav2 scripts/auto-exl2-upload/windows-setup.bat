@@ -42,7 +42,7 @@ echo CUDA compilers:
 where nvcc
 echo CUDA_HOME:
 echo %CUDA_HOME%
-set /p cuda_version="Please enter your CUDA version (11 or 12): "
+set /p cuda_version="Please enter your CUDA version (12.8 for blackwell) (11, 12, or 128): "
 
 if "%cuda_version%"=="11" (
     echo Installing PyTorch for CUDA 11.8...
@@ -50,8 +50,11 @@ if "%cuda_version%"=="11" (
 ) else if "%cuda_version%"=="12" (
     echo Installing PyTorch for CUDA 12.4...
     venv\scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cu124 --upgrade
+) else if "%cuda_version%"=="128" (
+    echo Installing PyTorch for CUDA 12.8...
+    venv\scripts\python.exe -m pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cu128 --upgrade
 ) else (
-    echo Invalid CUDA version. Please enter 11 or 12.
+    echo Invalid CUDA version. Please enter 11, 12, 128.
     pause
     exit
 )

@@ -37,7 +37,7 @@ if [ "$exllamav2_version" != "stable" ] && [ "$exllamav2_version" != "dev" ]; th
 fi
 
 # if CUDA version 12 install pytorch for 12.1, else if CUDA 11 install pytorch for 11.8. If ROCm, install pytorch for ROCm 5.7
-read -p "Please enter your GPU compute version, CUDA 11/12 or AMD ROCm (11, 12, rocm): " pytorch_version
+read -p "Please enter your GPU compute version, CUDA 11/12, CUDA 12.8 (blackwell) or AMD ROCm (11, 12, 128, rocm): " pytorch_version
 
 if [ "$pytorch_version" = "11" ]; then
     echo "Installing PyTorch for CUDA 11.8"
@@ -48,8 +48,11 @@ elif [ "$pytorch_version" = "12" ]; then
 elif [ "$pytorch_version" = "rocm" ]; then
     echo "Installing PyTorch for AMD ROCm 5.7"
     venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/rocm5.7 --upgrade
+elif [ "$pytorch_version" = "128" ]; then
+    echo "Installing PyTorch for CUDA 12.8"
+    venv/bin/python -m pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cu128 --upgrade
 else
-    echo "Invalid compute version. Please enter 11, 12, or rocm."
+    echo "Invalid compute version. Please enter 11, 12, 128, or rocm."
     read -p "Press enter to continue"
     exit
 fi
