@@ -191,7 +191,7 @@ if repo_exists(f"{whoami().get('name', None)}/{modelname}-exl2") == False:
         file.write(f"[measurement.json](https://huggingface.co/{whoami().get('name', None)}/{modelname}-exl2/blob/main/measurement.json)\n")
     print("Created README.md")
 
-    upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add temp README") #upload md file
+    upload_file(path_or_fileobj="README.md", path_in_repo="README.md", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message="Add generated README") #upload md file
     print("Uploaded README.md to main")
 else:
     input("repo already exists, are you resuming a previous process? (Press enter to continue, ctrl+c to exit)")
@@ -226,7 +226,7 @@ for bpw in bpwvalue:
         print("Deleting model README.")
     except:
         print("Skipping README delete.")
-    upload_folder(folder_path=f"{model}-exl2-{bpw}bpw", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message=f"Add quant for BPW {bpw}", revision=f"{bpw}bpw") #upload quantized model
+    upload_folder(folder_path=f"{model}-exl2-{bpw}bpw", repo_id=f"{whoami().get('name', None)}/{modelname}-exl2", commit_message=f"Add files for {bpw}bpw quant", revision=f"{bpw}bpw") #upload quantized model
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw-WD", shell=True) #remove working directory
     subprocess.run(f"{osrmd} {model}-exl2-{bpw}bpw", shell=True) #remove compile directory
 
