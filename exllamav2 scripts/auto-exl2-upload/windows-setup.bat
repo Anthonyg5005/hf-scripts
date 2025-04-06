@@ -69,9 +69,9 @@ del enter-venv.bat
 REM download stuff
 echo Downloading files...
 if "%exllamav2_version%"=="stable" (
-    git clone https://github.com/turboderp/exllamav2
+    git clone https://github.com/turboderp-org/exllamav2
 ) else if "%exllamav2_version%"=="dev" (
-    git clone https://github.com/turboderp/exllamav2 -b dev
+    git clone https://github.com/turboderp-org/exllamav2 -b dev
 )
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/convert-to-safetensors.py
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/download-model.py

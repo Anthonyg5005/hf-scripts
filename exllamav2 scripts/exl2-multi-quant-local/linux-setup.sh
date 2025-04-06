@@ -67,9 +67,9 @@ rm enter-venv.sh
 # download stuff
 echo "Downloading files"
 if [ "$exllamav2_version" = "stable" ]; then
-    git clone https://github.com/turboderp/exllamav2
+    git clone https://github.com/turboderp-org/exllamav2
 elif [ "$exllamav2_version" = "dev" ]; then
-    git clone https://github.com/turboderp/exllamav2 -b dev
+    git clone https://github.com/turboderp-org/exllamav2 -b dev
 fi
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/convert-to-safetensors.py
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/download-model.py
