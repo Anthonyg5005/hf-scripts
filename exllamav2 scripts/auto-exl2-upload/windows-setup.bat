@@ -73,7 +73,7 @@ if "%exllamav2_version%"=="stable" (
 ) else if "%exllamav2_version%"=="dev" (
     git clone https://github.com/turboderp-org/exllamav2 -b dev
 )
-wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/convert-to-safetensors.py
+wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/461d1fdb761978436a0dd10550053881f997d182/convert-to-safetensors.py
 wget https://raw.githubusercontent.com/oobabooga/text-generation-webui/main/download-model.py
 
 echo Installing pip packages...
